@@ -3,52 +3,43 @@ title: Home
 permalink: /
 
 layout: home
-
-hero:
-  image: /assets/uswds/img/hero.png
-  callout:
-    alt: "Hero callout:"
-    text: Call attention to a current priority
-  button:
-    href: /callout/
-    text: This is a call to all my
-  link:
-    text: Link to more about that priority
-    href: /link/
-  content: Support the callout with some short explanatory text. You don't need more than a couple of sentences.
-
-tagline: A tagline highlights your approach.
-intro: |
-  The tagline should inspire confidence and interest, [focusing on the value](javascript:void(0);) that your overall approach offers to your audience. Use a heading typeface and keep your tagline to just a few words, and don’t confuse or mystify.
-
-  Use the right side of the grid to explain the tagline a bit more. What are your goals? How do you do your work? Write in the present tense, and stay brief here. People who are interested can find details on internal pages.
-
-graphics:
-  - image:
-      src: /assets/uswds/img/circle-124.png
-      alt: ''
-    title: Graphic headings can vary.
-    description: Graphic headings can be used a few [different ways](javascript:void(0);), depending on what your landing page is for. Highlight your values, specific program areas, or results.
-  - image:
-      src: /assets/uswds/img/circle-124.png
-      alt: ''
-    title: Stick to 6 or fewer words.
-    description: Keep body text to about 30. They can be shorter, but try to be somewhat balanced across all four. It creates a clean appearance with good spacing.
-  - image:
-      src: /assets/uswds/img/circle-124.png
-      alt: ''
-    title: Never highlight anything without a goal.
-    description: For anything you want to highlight here, understand what your users know now, and what activity or impression you want from them after they see it.
-  - image:
-      src: /assets/uswds/img/circle-124.png
-      alt: ''
-    title: Could also have 2 or 6.
-    description: In addition to your goal, find out your users’ goals. [What do they want to know](https://18f.gsa.gov/) or do that supports your mission? Use these headings to show those.
 ---
 
-## Section heading
+This site provides documentation, examples, guides primarily focused on using the Census API in frontend and backend Javascript applications by unitizing the CitySDK library. The format of this site designed interactive and accessible. 
 
-Everything up to this point [should help people](javascript:void(0);) understand your agency or project: who you are, your goal or mission, and how you approach it. Use this section to encourage them to act. Describe why they should get in touch here, and use an active verb on the button below. “Get in touch,” “Learn more,” and so on.
-{: .usa-font-lead }
+## What does the Census Bureau do?
 
-[Call to action](#){: .usa-button .usa-button-big }
+The Census Bureau's suverys provide a wide range of information on the population and economy of the nation. The data is used by local, state, and federal goverements to determine the distribution of represention, and make planning decisions about community services and funding. 
+
+The data is available to the publicly via [Data.census.gov](https://data.census.gov/cedsci/), and for developers via an [API](https://www.census.gov/data/developers/about.html). 
+
+## CitySDK
+
+CitySDK streamlines the development of applications that use the Census Bureau Data. It combines the Data API with TIGER, to provide GeoJSON (geographic shapes), and geocoder, to provide translations from latitude/longitude to the required geography study area. This abstracts the multiple APIs into one query allowing for developers, data scientisit, and civic innovators to drastically reduce the time to explore data, get insightsm abd develop applications.
+
+[CitySDK v2.0(beta)](https://uscensusbureau.github.io/citysdk/) is currently maintained by Logan Powell
+
+### [Documentation](/docs/)
+
+Quick API Reference and examples on how to use CitySDK.
+
+https://www.census.gov/data/developers/about.html
+
+### [Guides](/guides/)
+
+Guides for beginners to start developing using CitySDK, and explore large amount of Census Data.
+
+### [Examples](/examples/)
+
+Examples on using CitySDK with various other javascript libraries.
+
+* Choropleth map using leaflet
+* Using predicates
+
+### [Community](/community/)
+
+### How to contribute
+
+If you would like to add features and content, report an issue,  or suggest changes submit a request on [Github](https://github.com).
+
+This website was built using U.S. Web Design System's Jekyll theme. [(uswds-jekyll)](https://github.com/18F/uswds-jekyll)

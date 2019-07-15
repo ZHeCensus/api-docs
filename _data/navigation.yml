@@ -14,22 +14,17 @@
 primary:
   - text: Documentation
     href: /docs/
-  - text: Navigation section
+  - text: Guides
+    href: /guides/
     links:
-      - text: Demo link A
-        href: /two/a/
-      - text: Demo link B
-        href: /two/b/
-      - text: Demo link C
-        href: /two/c/
-      - text: Demo link D
-        href: /two/a/
-      - text: Demo link E
-        href: /two/b/
-      - text: Demo link F
-        href: /two/c/
-  - text: Referenced section
-    links: footer
+      - text: Overview
+        href: /guides/
+      - text: Introduction
+        href: /guides/intro
+  - text: Examples
+    href: /examples/
+  - text: Community
+    href: /community/
 
 secondary:
   - text: View on Github
@@ -37,18 +32,34 @@ secondary:
     external: true
 
 docs:
-  - text: Sidenav Documentation
+  - text: Overview
     href: /docs/
-  - text: Sidenav Navigation section
-    links:
-      - text: Demo link A
-        href: /two/a/
-      - text: Demo link B
-        href: /two/b/
-      - text: Demo link C
-        href: /two/c/
-  - text: Sidenav Referenced section
-    links: footer
-  - text: Sidenav External link
-    href: https://18f.gsa.gov
+  - text: CitySDK Readme
+    href: https://uscensusbureau.github.io/citysdk/
     external: true
+
+guides:
+  - text: Overview
+    href: /guides/
+  - text: Introduction
+    href: /guides/intro/
+
+guides-intro:
+  - text: Objectives and Details
+    href: /guides/intro/
+  - text: Getting Started
+    href: /guides/intro/1/
+  - text: Source and Metrics
+    href: /guides/intro/2/
+  - text: Geographies
+    href: /guides/intro/3/
+  - text: Displaying the data
+    href: /guides/intro/4/
+
+community:
+  - text: Overview
+    href: /community/
+  - text: Implementations
+    href: /community/implementations/
+  - text: Showcase
+    href: /community/showcase/

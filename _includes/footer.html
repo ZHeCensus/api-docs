@@ -1,9 +1,5 @@
 {% assign footer = site.data.footer %}
 
-{% if footer.type == 'slim' %}
-  {% include components/footer--slim.html %}
-{% elsif footer.type == 'medium' %}
-  {% include components/footer--medium.html %}
-{% elsif footer.type == 'big' %}
-  {% include components/footer--big.html %}
-{% endif %}
+<div class="usa-grid usa-footer-return-to-top">
+  <a href="{{ footer.top.href | default: '#' }}">{{ footer.top.text | default: 'Return to top' }}</a>
+</div>

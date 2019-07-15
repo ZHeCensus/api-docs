@@ -30,5 +30,3 @@ links: footer
 # Set to true to make the form visible.
 # Hooking it up to send the data somewhere is up to you :)
 big_footer_signup_form: false
-
-type: silm
