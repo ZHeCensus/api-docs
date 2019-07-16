@@ -40,6 +40,6 @@ Examples on using CitySDK with various other javascript libraries.
 
 ### How to contribute
 
-If you would like to add features and content, report an issue,  or suggest changes submit a request on [Github](https://github.com).
+If you would like to add features and content, report an issue,  or suggest changes submit a pull request on [Github](https://github.com).
 
 This website was built using U.S. Web Design System's Jekyll theme. [(uswds-jekyll)](https://github.com/18F/uswds-jekyll)
