@@ -19,13 +19,13 @@ main:
         {% if _current > 0 %}
             {% assign previous_page_num = _current |minus:1 %}
             {% assign previous_page = sidenav[previous_page_num] %}
-            <a class="usa-button usa-button--outline" href="{{previous_page.href}}">Previous: {{previous_page.text}}</a>
+            <a class="usa-button usa-button--outline" href="{{previous_page.href | relative_url }}">Previous: {{previous_page.text}}</a>
         {% endif %}
         {% assign _max_size = sidenav.size |minus:1 %}
         {% if _current < _max_size %}
             {% assign next_page_num = _current |plus: 1 %}
             {% assign next_page = sidenav[next_page_num] %}
-            <a class="usa-button usa-button--outline" href="{{next_page.href}}">Next: {{next_page.text}}</a>
+            <a class="usa-button usa-button--outline" href="{{next_page.href | relative_url }}">Next: {{next_page.text}}</a>
         {% endif %}
     {% endif %}
 {% endif %}

@@ -32,7 +32,7 @@ We will focus on the the American Community Survey (ACS) because of its wide var
 
 For the first example we will get the Population of the all the States. At [data.census.gov](http://data.census.gov) click on the **Population** under the **Subjects** heading on the main page.  You can see the various tables that have population information, select the first one "Total Population in United States"  
 
-![](/assets/images/getting1.png)
+![]({{ '/assets/images/getting1.png' | relative_url }})
 
 It will bring you to this window where you can look at the table in detail. Take a note of the follow.
 
@@ -43,27 +43,27 @@ It will bring you to this window where you can look at the table in detail. Take
 
 This will help you find the specific column ids needed for the query. For this example we will get the total population, male and female population columns. 
 
-![](/assets/images/getting2.png)
+![]({{ '/assets/images/getting2.png' | relative_url }})
 
 1. Locate the Source on [https://www.census.gov/data/developers/data-sets.html](https://www.census.gov/data/developers/data-sets.html) , using the Survey/Program ID, Year, and Estimate. 
 
-![](/assets/images/getting3.png)
+![]({{ '/assets/images/getting3.png' | relative_url }})
 
 2. Select the year 2017 
 
-![](/assets/images/getting4.png)
+![]({{ '/assets/images/getting4.png' | relative_url }})
 
 3. Select the group, which is the prefix of the table id (DP). Note each group has different prefixes look at the example Example call for clues on the prefix
 
-![](/assets/images/getting5.png)
+![]({{ '/assets/images/getting5.png' | relative_url }})
 
 4. Find your columns by searching the page (Ctrl + F) for your Tableid (DP05)
 
-![](/assets/images/getting6.png)
+![]({{ '/assets/images/getting6.png' | relative_url }})
 
 We found them!! Now copy the column names (DP05_0001E, DP05_0002E, DP05_0003E) and the url 
 
-![](/assets/images/getting7.png)
+![]({{ '/assets/images/getting7.png' | relative_url }})
 
 (an additional example, in a drop down)
 
@@ -136,11 +136,11 @@ after your query is done, you will get this.
 
 (query for the additional example)
 
-![](/assets/images/getting8.png)
+![]({{ '/assets/images/getting8.png' | relative_url }})
 
 [https://api.census.gov/data/2017/acs/acs1/subject/variables.html](https://api.census.gov/data/2017/acs/acs1/subject/variables.html)
 
-![](/assets/images/getting9.png)
+![]({{ '/assets/images/getting9.png' | relative_url }})
 
 "S2801_C01_001E","S2801_C01_002E" 
 

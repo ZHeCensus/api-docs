@@ -27,7 +27,9 @@ github_username: jekyll
 # Build settings
 markdown: kramdown
 highlighter: rouge
-theme: uswds-jekyll
+#theme: uswds-jekyll
+remote_theme: 18F/uswds-jekyll
+baseurl: '/api-docs'
 plugins:
   - jekyll-feed
 # Exclude from processing.

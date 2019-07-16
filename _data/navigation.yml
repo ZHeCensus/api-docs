@@ -16,11 +16,6 @@ primary:
     href: /docs/
   - text: Guides
     href: /guides/
-    links:
-      - text: Overview
-        href: /guides/
-      - text: Introduction
-        href: /guides/intro
   - text: Examples
     href: /examples/
   - text: Community

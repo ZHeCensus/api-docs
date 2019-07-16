@@ -10,5 +10,5 @@
 <link rel="stylesheet"
   href="{{ _style.href | default: _style | relative_url }}"
   media="{{ _style.media | default: 'screen' }}">
-  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <link rel="stylesheet" href="{{ '/assets/css/highlight.css' | relative_url }}">
 {% endfor %}{% endfor %}
