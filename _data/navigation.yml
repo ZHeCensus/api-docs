@@ -51,6 +51,14 @@ guides-intro:
   - text: Displaying the data
     href: /guides/intro/4/
 
+examples: 
+  - text: Overview
+    href: /examples/
+  - text: Choropleth map using leaflet
+    href: /examples/leaflet-choropleth
+  - text: Using predicates
+    href: /examples/predicates
+
 community:
   - text: Overview
     href: /community/

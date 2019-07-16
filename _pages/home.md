@@ -19,24 +19,24 @@ CitySDK streamlines the development of applications that use the Census Bureau D
 
 [CitySDK v2.0(beta)](https://uscensusbureau.github.io/citysdk/) is currently maintained by Logan Powell
 
-### [Documentation](/docs/)
+### [Documentation]({{ '/docs/' | relative_url }})
 
 Quick API Reference and examples on how to use CitySDK.
 
 https://www.census.gov/data/developers/about.html
 
-### [Guides](/guides/)
+### [Guides]({{ '/guides/' | relative_url }})
 
 Guides for beginners to start developing using CitySDK, and explore large amount of Census Data.
 
-### [Examples](/examples/)
+### [Examples]({{ '/examples/' | relative_url }})
 
 Examples on using CitySDK with various other javascript libraries.
 
 * Choropleth map using leaflet
 * Using predicates
 
-### [Community](/community/)
+### [Community]({{ '/community/' | relative_url }})
 
 ### How to contribute
 

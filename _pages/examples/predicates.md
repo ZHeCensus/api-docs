@@ -1,10 +1,10 @@
 ---
-title: Examples
+title: Using predicates
 description: This is a examples page.
-permalink: /examples/
+permalink: /examples/predicates/
 
 layout: post
 sidenav: examples
 ---
 
-click on the sidenav to see examples
+under construction...
