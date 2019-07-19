@@ -26,11 +26,11 @@ Then it is put into a query object. (ex. get the population count from ACS 2017 
 }
 ```
 
-Each dataset provides information for different topics, years, and at different levels (national, state, county, block levels). Census Data API provides various datasets, you can explore them in detail [here](https://api.census.gov/data.html). 
+Each dataset provides information for different topics, years, and at different levels (national, state, county, block levels). Census Data API provides various datasets, you can explore them in detail [here](https://api.census.gov/data.html).
 
 We will focus on the the American Community Survey (ACS) because of its wide variability of population questions and frequent updates. To discover sources and metrics we can use the search feature in [data.census.gov](http://data.census.gov). The Slack and Gitter developer communities; and data experts are also a great source, if you can't find the data.
 
-For the first example we will get the Population of the all the States. At [data.census.gov](http://data.census.gov) click on the **Population** under the **Subjects** heading on the main page.  You can see the various tables that have population information, select the first one "Total Population in United States"  
+For the first example we will get the Population of the all the States. At [data.census.gov](http://data.census.gov) click on the **Population** under the **Subjects** heading on the main page. You can see the various tables that have population information, select the first one "Total Population in United States"
 
 ![]({{ '/assets/images/getting1.png' | relative_url }})
 
@@ -41,15 +41,15 @@ It will bring you to this window where you can look at the table in detail. Take
 - **Estimate:** 1-year
 - **TableID:** DP05
 
-This will help you find the specific column ids needed for the query. For this example we will get the total population, male and female population columns. 
+This will help you find the specific column ids needed for the query. For this example we will get the total population, male and female population columns.
 
 ![]({{ '/assets/images/getting2.png' | relative_url }})
 
-1. Locate the Source on [https://www.census.gov/data/developers/data-sets.html](https://www.census.gov/data/developers/data-sets.html) , using the Survey/Program ID, Year, and Estimate. 
+1. Locate the Source on [https://www.census.gov/data/developers/data-sets.html](https://www.census.gov/data/developers/data-sets.html) , using the Survey/Program ID, Year, and Estimate.
 
 ![]({{ '/assets/images/getting3.png' | relative_url }})
 
-2. Select the year 2017 
+2. Select the year 2017
 
 ![]({{ '/assets/images/getting4.png' | relative_url }})
 
@@ -61,7 +61,7 @@ This will help you find the specific column ids needed for the query. For this e
 
 ![]({{ '/assets/images/getting6.png' | relative_url }})
 
-We found them!! Now copy the column names (DP05_0001E, DP05_0002E, DP05_0003E) and the url 
+We found them!! Now copy the column names (DP05_0001E, DP05_0002E, DP05_0003E) and the url
 
 ![]({{ '/assets/images/getting7.png' | relative_url }})
 
@@ -97,8 +97,8 @@ Add you the column names in array, add "NAME" column too
 
 ```js
 {
-    "sourcePath" : ["acs","acs1","profile"], 
-    "vintage" : 2017,               
+    "sourcePath" : ["acs","acs1","profile"],
+    "vintage" : 2017,
     "values" : ["NAME","DP05_0001E","DP05_0002E", "DP05_0003E"], // metric (column for total count, male, and female popluation)
 }
 ```
@@ -111,7 +111,7 @@ after your query is done, you will get this.
     "vintage" : 2017,               // source (year, 2017)
     "values" : ["NAME","DP05_0001E","DP05_0002E", "DP05_0003E"],     // metric (column for total count, male, and female popluation)
     "geoHierarchy" : {              // geographic entity (grouped by state)
-      "state" : "*" 
+      "state" : "*"
     }
 }
 
@@ -142,16 +142,16 @@ after your query is done, you will get this.
 
 ![]({{ '/assets/images/getting9.png' | relative_url }})
 
-"S2801_C01_001E","S2801_C01_002E" 
+"S2801_C01_001E","S2801_C01_002E"
 
 ```js
 {
   "sourcePath" : ["acs","acs1","subject "], // source (survey, ACS 1-year subject estimate)
   "vintage" : 2017,                         // source (year, 2017)
-  "values" : ["NAME","S2801_C01_001E","S2801_C01_002E" ], // metric (column for total households, 
+  "values" : ["NAME","S2801_C01_001E","S2801_C01_002E" ], // metric (column for total households,
                                                           // one or more types of computing devices)
   "geoHierarchy" : {                              // geographic entity (grouped by state)
-    "state" : "*" 
+    "state" : "*"
   }
 }
 ```
