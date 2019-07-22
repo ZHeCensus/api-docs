@@ -29,6 +29,8 @@ secondary:
 docs:
   - text: Overview
     href: /docs/
+  - text: Try it
+    href: /docs/try/
   - text: CitySDK Readme
     href: https://uscensusbureau.github.io/citysdk/
     external: true

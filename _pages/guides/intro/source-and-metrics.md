@@ -5,6 +5,7 @@ permalink: /guides/intro/2/
 
 layout: guide
 sidenav: guides-intro
+lightbox: true
 ---
 
 To first get data from the Census Data API we have to know three things
