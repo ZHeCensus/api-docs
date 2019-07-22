@@ -5,6 +5,7 @@ permalink: /guides/intro/1/
 
 layout: guide
 sidenav: guides-intro
+lightbox: true
 ---
 
 To use CitySDK include the script in your page's head

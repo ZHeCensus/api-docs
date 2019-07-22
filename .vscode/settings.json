@@ -1,3 +1,6 @@
 {
-    "html.format.enable": false
+    "html.format.enable": false,
+    "editor.formatOnSave": true,
+    "prettier.eslintIntegration": true,
+    "prettier.stylelintIntegration": true
 }

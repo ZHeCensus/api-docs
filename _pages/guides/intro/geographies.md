@@ -5,4 +5,5 @@ permalink: /guides/intro/3/
 
 layout: guide
 sidenav: guides-intro
+lightbox: true
 ---

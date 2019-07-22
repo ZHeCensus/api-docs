@@ -10,6 +10,7 @@ subnav:
       href: '#what-is-the-census'
     - text: What are APIs?
       href: '#what-are-apis'
+lightbox: true
 ---
 
 This guide provides a quick introduction in understanding and using the various datasets the Census Bureau provides publicly via Application Programming Interface (API) in JavaScript.

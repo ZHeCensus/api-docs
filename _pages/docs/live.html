@@ -1,0 +1,182 @@
+---
+title: Try it
+description: This is a documentation page.
+permalink: /docs/try/
+
+layout: post
+sidenav: docs
+vue: true
+citysdk: true
+---
+
+<div id="codebox">
+  <div class="input">
+    <textarea
+      v-model="input"
+      v-on:keyup="updateInput"
+      placeholder="add query here"
+    >
+    </textarea>
+    <div class="toggles">
+      <button v-if="error.length === 0" v-on:click="runQuery">
+        Run Query
+      </button>
+      <p>${status}</p>
+    </div>
+  </div>
+
+  <div class="output">
+    <p id="results">${output}</p>
+  </div>
+  <span title="Copy" class="copy" v-on:click="copyResult">📋</span>
+</div>
+
+<style>
+  #codebox {
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 2px 3px;
+    border: 1px solid;
+    position: relative;
+  }
+
+  #codebox button {
+    padding: 2px 5px !important;
+  }
+
+  #codebox .input {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 340px;
+    min-width: 340px;
+  }
+
+  #codebox .input .toggles {
+    height: 35px;
+    padding: 0px 5px;
+  }
+
+  #codebox .input textarea {
+    flex: 1;
+    margin: 0 !important;
+    border: none;
+    resize: none;
+    overflow: auto;
+    background: #272822;
+    color: #f8f8f2;
+    font-family: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas',
+      'Courier', monospace;
+    padding: 1.2em;
+    min-width: 100%;
+  }
+
+  #codebox .output {
+    height: 400px;
+    background: rgb(241, 241, 241);
+    flex: 1 1 340px;
+    min-width: 340px;
+    overflow: auto;
+    padding: 1.2em;
+  }
+
+  .output p {
+    white-space: pre;
+  }
+
+  #codebox .copy {
+    position: absolute;
+    right: 15px;
+    top: 0px;
+  }
+
+  #codebox .copy:hover {
+    text-shadow: 2px 2px rgb(153, 153, 153);
+  }
+</style>
+
+<script>
+  var initInput = {
+    vintage: '2017',
+    geoHierarchy: {
+      state: {
+        lat: 28.2639,
+        lng: -80.7214
+      },
+      county: '*'
+    },
+    sourcePath: ['acs', 'acs5'],
+    values: ['B00001_001E'],
+    geoResolution: '20m'
+  };
+
+  //   var initInput = {
+  //     vintage: "2017",
+  //     geoHierarchy: {
+  //       county: {
+  //         lat: 28.2639,
+  //         lng: -80.7214
+  //       }
+  //     },
+  //     sourcePath: ["acs", "acs5"],
+  //     values: ["B00001_001E"]
+  //   };
+
+  var app = new Vue({
+    delimiters: ['${', '}'],
+    el: '#codebox',
+    data: {
+      input: JSON.stringify(initInput, null, 2),
+      error: '',
+      result: {},
+      status: ''
+    },
+    computed: {
+      output: function() {
+        return JSON.stringify(this.result, null, 2);
+      }
+    },
+    methods: {
+      updateInput(event) {
+        var target = event.target;
+        var value = target.value;
+        this.error = '';
+        if (event.keyCode !== 17) {
+          try {
+            const formatted = JSON.stringify(JSON.parse(value), null, 4);
+            //todo: stop cursor from jumping to the end when value changes
+            //todo: use hljs.highlightBlock
+
+            if (formatted !== '{}') {
+              target.value = formatted;
+              this.input = formatted;
+              return;
+            }
+          } catch (error) {
+            this.error = error.message;
+          }
+        }
+        this.input = value;
+      },
+      runQuery() {
+        var self = this;
+        census(JSON.parse(this.input), function(error, result) {
+          console.log(error);
+          //todo: handle error
+          //todo: add loading message
+          self.result = result;
+        });
+      },
+      copyResult() {
+        //https://stackoverflow.com/questions/36639681/how-to-copy-text-from-a-div-to-clipboard
+        var range = document.createRange();
+        range.selectNode(document.getElementById('results'));
+        window.getSelection().removeAllRanges(); // clear current selection
+        window.getSelection().addRange(range); // to select text
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges(); // to deselect
+        console.log('clicked');
+      }
+    }
+  });
+</script>
