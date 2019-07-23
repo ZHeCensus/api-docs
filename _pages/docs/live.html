@@ -232,21 +232,8 @@ leaflet: true
         var target = event.target;
         var value = target.value;
         this.error = "";
-        if (event.keyCode !== 17) {
-          try {
-            const formatted = JSON.stringify(JSON.parse(value), null, 4);
-            //todo: stop cursor from jumping to the end when value changes
-            //todo: use hljs.highlightBlock
-
-            if (formatted !== "{}") {
-              target.value = formatted;
-              this.input = formatted;
-              return;
-            }
-          } catch (error) {
-            this.error = error.message;
-          }
-        }
+        //todo: stop cursor from jumping to the end when value changes
+        //todo: use hljs.highlightBlock
         this.input = value;
       },
       runQuery() {
