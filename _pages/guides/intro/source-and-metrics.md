@@ -29,7 +29,9 @@ Then it is put into a query object. (ex. get the population count from ACS 2017 
 
 Each dataset provides information for different topics, years, and at different levels (national, state, county, block levels). Census Data API provides various datasets, you can explore them in detail [here](https://api.census.gov/data.html).
 
-We will focus on the the American Community Survey (ACS) because of its wide variability of population questions and frequent updates. To discover sources and metrics we can use the search feature in [data.census.gov](http://data.census.gov). The Slack and Gitter developer communities; and data experts are also a great source, if you can't find the data.
+We will focus on the the American Community Survey (ACS) because of its wide variarty of population questions and frequent updates.
+
+You can also discover sources and metrics using the search feature in [data.census.gov](http://data.census.gov). If you need help trying to find a specific data set see the [Community Page]({{ '/community/' | relative_url }}), we have helpful a community that will be happy to assist you.
 
 For the first example we will get the Population of the all the States. At [data.census.gov](http://data.census.gov) click on the **Population** under the **Subjects** heading on the main page. You can see the various tables that have population information, select the first one "Total Population in United States"
 

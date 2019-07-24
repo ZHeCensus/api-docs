@@ -16,8 +16,6 @@ subnav:
     href: '#geocoding-latitudelongitude---fips-code'
   - text: Statistics
     href: '#statistics'
-  - text: Help for Discovering Census data
-    href: '#-help-for-discovering-census-data'
   - text: Timeseries data
     href: '#timeseries-data-statistics-only'
   - text: Cartographic GeoJSON
@@ -28,13 +26,9 @@ subnav:
 
 # CitySDK v2.0 (Beta)
 
-#### Thank You's due to some very generous Clojurians:
-- @thheller (author of the [`shadow-cljs`] build tool)
-- @cgrand (author of the [`xforms`] library)
-- The Clojure community at large for being such a great place to learn
+CitySDK streamlines the development of applications that use the Census Bureau Data. It combines the Census Data API with TIGER to provide GeoJSON (geographic shapes), and geocoder to provide translations from latitude/longitude to the required geography study area. This abstracts the multiple APIs into one query allowing for developers, data scientisit, and civic innovators to drastically reduce the time to explore data, get insight and develop applications.
 
-[`shadow-cljs`]: https://github.com/thheller/shadow-cljs
-[`xforms`]: https://github.com/cgrand/xforms
+[CitySDK v2.0(beta)](https://uscensusbureau.github.io/citysdk/) is currently maintained by Logan Powell.
 
 ## Installation
 ```
@@ -197,23 +191,6 @@ census({
 Here, we added the parameters for `sourcePath` (the path to the survey and/or source of the statistics) and `values` (the identifiers of the statistics we're interested in). By including these parameters within your argument object, you trigger the `census` function to get statistics. This "deploy on parameter set" strategy is how the `census` function determines your intent.
 
 ---
-### 🤔 Help for Discovering Census data
-
-
-You're probably thinking: "How am I supposed to know what codes to use inside those parameters?" - or - "Where did that `"cbp"` & `"ESTAB"` stuff come from?" The data sets covered by the CitySDK are vast. As such, this is the steepest part of the learning curve. But, don't worry, there are a number of different resources available to assist you in your quest:
-
-1. The Census [Developers' Microsite] <- START HERE
-2. The [Census Discovery Tool]. 
-3. Census Slack and Gitter developer [communities].
-4. Data [Experts]
-
-[Developers' Microsite]: https://www.census.gov/developers/
-[Census Discovery Tool]: https://api.census.gov/data.html
-[communities]: #community
-[Experts]: #dedicated-data-experts
-
----
-
 
 #### Example: get `"values"` by ID (with key):
 RETURN TYPE: `JSON`
@@ -543,20 +520,8 @@ Geographic Area Type                                          | 1990  | 2000  | 
 `"zip code tabulation area"`                                    |       | ✔     |     |        |  ✔          | ✔         
 
 
-
 ## More Information about Cartography Files
 - For more information about the files translated herein please visit the Census Bureau's [Cartographic Boundary File Description
  Page](https://www.census.gov/geo/maps-data/data/cbf/cbf_description.html)
 - For a comparison of the available formats of geographic area files, please visit the Census Bureau's [TIGER Products page
 ](https://www.census.gov/geo/maps-data/data/tiger.html)
-
-# Community
-- Join us on [Gitter](https://gitter.im/uscensusbureau/citysdk)
-- Join us on [Slack](https://join.slack.com/t/uscensusbureau/shared_invite/enQtMjQ3NzUyNTM3NDU3LTZmNGI1MmQzY2Y2ZTU1ODJhNDQwMmY2YmZiNmFkNzg4YmJkYmQzZjQyNDhkNDYxN2JhYjkxZDEwMGI2OGU5NzQ)
-- Send us an email: [cnmp.developers.list@census.gov](mailto:cnmp.developers.list@census.gov)
-
-# Dedicated Data Experts
-If you're new to Census data and need some help figuring out which of the many products Census curates for public use, don't hesitate to reach out to these contacts for help:
-- Ryan Dolan: ryan.s.dolan@census.gov
-- Gerson Vasquez: gerson.d.vasquez@census.gov
-- Alexandra Barker: alexandra.s.barker@census.gov
