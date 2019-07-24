@@ -31,6 +31,8 @@ docs:
     href: /docs/
   - text: Try it
     href: /docs/try/
+  - text: FAQ
+    href: /docs/faq/
   - text: CitySDK Readme
     href: https://uscensusbureau.github.io/citysdk/
     external: true
@@ -53,7 +55,7 @@ guides-intro:
   - text: Displaying the data
     href: /guides/intro/4/
 
-examples: 
+examples:
   - text: Overview
     href: /examples/
   - text: Choropleth map using leaflet

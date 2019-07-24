@@ -10,28 +10,36 @@ citysdk: true
 leaflet: true
 ---
 
-<div id="codebox">
-  <div class="input">
-    <textarea
-      v-model="input"
-      v-on:keyup="updateInput"
-      placeholder="add query here"
-    >
-    </textarea>
-    <div class="toggles">
-      <button v-if="error.length === 0 && !loading" v-on:click="runQuery">
-        Run Query
-      </button>
-      <span>${status}</span>
-      <span class="error">${error}</span>
+<div id="app">
+  <div id="codebox">
+    <div class="input">
+      <textarea
+        v-model="input"
+        v-on:keyup="updateInput"
+        placeholder="add query here"
+      >
+      </textarea>
+      <div class="toggles">
+        <button v-if="error.length === 0 && !loading" v-on:click="runQuery">
+          Run Query
+        </button>
+        <span>${status}</span>
+        <span class="error">${error}</span>
+      </div>
     </div>
-  </div>
 
-  <div v-bind:class="[result && result.type ? 'outputmap' : 'output']">
-    <p id="results" v-show="!(result &&result.type)">${output}</p>
-    <div id="map" v-show="showMap"></div>
+    <div v-bind:class="[result && result.type ? 'outputmap' : 'output']">
+      <p id="results" v-show="!(result &&result.type)">${output}</p>
+      <div id="map" v-show="showMap"></div>
+    </div>
+    <span title="Copy" class="copy" v-on:click="copyResult">📋</span>
   </div>
-  <span title="Copy" class="copy" v-on:click="copyResult">📋</span>
+  <h3>Some Examples</h3>
+  <ul>
+    <li v-for="example in examples" v-on:click="updateExample(example)">
+      <a>${ example.description }</a>
+    </li>
+  </ul>
 </div>
 
 <style>
@@ -139,6 +147,8 @@ leaflet: true
   }
 </style>
 
+<script src="{{ '/assets/data/try_examples.js' | relative_url }}"></script>
+
 <script>
   var initInput = {
     vintage: "2017",
@@ -156,7 +166,7 @@ leaflet: true
 
   var app = new Vue({
     delimiters: ["${", "}"],
-    el: "#codebox",
+    el: "#app",
     data: {
       input: JSON.stringify(initInput, null, 2),
       loading: false,
@@ -165,7 +175,8 @@ leaflet: true
       status: "",
       layer: null,
       map: null,
-      showMap: true
+      showMap: true,
+      examples: examples
     },
     computed: {
       output: function() {
@@ -205,11 +216,10 @@ leaflet: true
             }
           }).addTo(this.map);
 
-          var self = this;
-          setTimeout(function() {
-            self.map.invalidateSize();
-            var group = new L.featureGroup([self.layer]);
-            self.map.fitBounds(group.getBounds());
+          setTimeout(() => {
+            this.map.invalidateSize();
+            var group = new L.featureGroup([this.layer]);
+            this.map.fitBounds(group.getBounds());
           }, 100);
         } else {
           this.showMap = false;
@@ -217,6 +227,10 @@ leaflet: true
       }
     },
     methods: {
+      updateExample(example) {
+        this.input = JSON.stringify(example.input, null, 2);
+        this.result = example.result;
+      },
       intiMap() {
         //init map
         this.map = L.map("map").setView([38.8482, -76.9312], 10);
@@ -234,21 +248,25 @@ leaflet: true
         this.error = "";
         //todo: stop cursor from jumping to the end when value changes
         //todo: use hljs.highlightBlock
+        try {
+          const formatted = JSON.stringify(JSON.parse(value), null, 4);
+        } catch (error) {
+          this.error = error.message;
+        }
         this.input = value;
       },
       runQuery() {
         this.loading = true;
         this.status = "loading";
-        var self = this;
-        census(JSON.parse(this.input), function(error, result) {
+        census(JSON.parse(this.input), (error, result) => {
           if (error) {
-            self.result = {};
-            self.error = error;
+            this.result = {};
+            this.error = error;
           } else {
-            self.result = result;
+            this.result = result;
           }
-          self.loading = false;
-          self.status = null;
+          this.loading = false;
+          this.status = null;
         });
       },
       copyResult() {
