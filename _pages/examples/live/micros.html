@@ -1,3 +1,7 @@
+---
+permalink: /examples/live/micros/
+---
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,62 +20,73 @@
   </head>
   <body>
     <div id="map"></div>
-    <div id="info"></div>
+
     <script>
-      //promise
-      function censusPromise(args) {
-        return new Promise(function(resolve, reject) {
-          census(args, function(err, json) {
-            if (!err) {
-              resolve(json);
-            } else {
-              reject(err);
-            }
-          });
-        });
+      //includes polyfill from mdn
+      if (!String.prototype.includes) {
+        String.prototype.includes = function(search, start) {
+          "use strict";
+          if (typeof start !== "number") {
+            start = 0;
+          }
+
+          if (start + search.length > this.length) {
+            return false;
+          } else {
+            return this.indexOf(search, start) !== -1;
+          }
+        };
       }
 
-      const QUERIES = [
-        {
-          query: {
-            vintage: "2017",
-            geoHierarchy: {
-              "metropolitan statistical area/micropolitan statistical area": "*"
-            },
-            sourcePath: ["acs", "acs5"],
-            values: ["NAME", "B00001_001E"],
-            geoResolution: "20m"
-          }
-        }
-      ];
-
-      const map = L.map("map").setView([38.8895, -98.4283], 4);
-
+      var map = L.map("map").setView([38.8895, -98.4283], 4);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors | Data: ACS 2017'
       }).addTo(map);
+      census(
+        {
+          vintage: "2017",
+          geoHierarchy: {
+            "metropolitan statistical area/micropolitan statistical area": "*"
+          },
+          sourcePath: ["acs", "acs5"],
+          values: ["NAME", "B01001_001E"],
+          geoResolution: "20m"
+        },
+        function(error, response) {
+          //filter for only micro
+          var featureCollection = {
+            type: "FeatureCollection",
+            features: response.features.filter(function(feature) {
+              return feature.properties.NAME.includes("Micro Area");
+            })
+          };
 
-      censusPromise(QUERIES[0].query).then(function(response) {
-        //filter for only micro
-        const featureCollection = {
-          type: "FeatureCollection",
-          features: response.features.filter(function(feature) {
-            return feature.properties.NAME.includes("Micro Area");
-          })
-        };
+          //add to map
 
-        const layer = L.geoJson(featureCollection, {
-          onEachFeature: function(feature, layer) {
-            layer.on("click", function(e) {
-              console.log(e, feature);
-            });
-          }
-        }).addTo(map);
-
-        const group = new L.featureGroup([layer]);
-        map.fitBounds(group.getBounds());
-      });
+          var layer = L.geoJson(featureCollection, {
+            onEachFeature: function onEachFeature(feature, layer) {
+              var name = feature.properties.NAME;
+              var population = feature.properties.B01001_001E;
+              var geoid = feature.properties.GEOID;
+              layer.bindPopup(
+                "<h3>" +
+                  name +
+                  "</h1><p>Population in 2017: " +
+                  population +
+                  "</3>"
+              );
+            },
+            style: {
+              "stroke-width": 1,
+              "fill-opacity": 0.6,
+              color: "#0694aa"
+            }
+          }).addTo(map);
+          var group = new L.featureGroup([layer]);
+          map.fitBounds(group.getBounds());
+        }
+      );
     </script>
   </body>
 </html>
