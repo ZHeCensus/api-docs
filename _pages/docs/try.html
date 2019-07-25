@@ -40,6 +40,15 @@ leaflet: true
       <a>${ example.description }</a>
     </li>
   </ul>
+  <h4>Note</h4>
+  <p>
+    Running a large query, especially at a lower resolution might crash the
+    page. If this happens either reduce the resolution or select a smaller study
+    area. For larger queries we recommend using Node with
+    `--max-old-space-size=4096` flag. Also refer to our <a href={{
+      "/docs/faq/#why-is-citysdk-slow" | relative_url
+    }}>FAQ</a> on tips to load large queries.
+  </p>
 </div>
 
 <style>

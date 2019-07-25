@@ -13,4 +13,9 @@ sidenav: guides
 ---
 
 ### [Introduction]({{ '/guides/intro/' | relative_url }})
-a quick introduction in understanding and using the various datasets the Census Bureau provides publicly via Application Programming Interface (API) in JavaScript.
+
+A quick introduction in the background of the Census Bureau and its data, and using the various datasets using CitySDK.
+
+### Understanding NACIS data
+
+### Geographies

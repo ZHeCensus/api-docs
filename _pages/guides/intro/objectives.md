@@ -6,19 +6,18 @@ permalink: /guides/intro/
 layout: guide
 sidenav: guides-intro
 subnav:
-    - text: What is the Census?
-      href: '#what-is-the-census'
-    - text: What are APIs?
-      href: '#what-are-apis'
+  - text: What is the Census?
+    href: "#what-is-the-census"
+  - text: What are APIs?
+    href: "#what-are-apis"
 lightbox: true
 ---
 
-This guide provides a quick introduction in understanding and using the various datasets the Census Bureau provides publicly via Application Programming Interface (API) in JavaScript.
+This guide provides a background of the Census Bureau and its data, and using the various datasets using CitySDK.
 
 You should have a basic understanding of JavaScript as this guide will use CitySDK, a JavaScript library that combines all the Census APIs easily to one query. It can be added to any webpage and provides geographies in the form of GeoJSON to easily added onto a web map.
 
-For instructions on using the individual APIs, see the advance guide , explore the Docs on the Census website. For other languages explore the tools page for their own documentation.   
-
+For instructions on using the individual APIs, see the advance guide (in progress). For other languages explore the community page for link to their documentation.
 
 ### What is the Census
 
@@ -47,26 +46,27 @@ Since statistics produced by the Census Bureau is the comprehensive measure of t
 [https://www.census.gov/programs-surveys/economic-census/guidance/data-uses.html](https://www.census.gov/programs-surveys/economic-census/guidance/data-uses.html)
 
 ### What are APIs?
+
 ... apis are ...
 
 ### Why use APIs?
 
-APIs provides an easy way to interface applications, and processes of any language that can use GET/POST requests. Various applications like [data.census.gov](http://data.census.gov) take advantage of the various public APIs to show up to date information and allow for analysis without having to download the data, and read it into a different software. 
+APIs provides an easy way to interface applications, and processes of any language that can use GET/POST requests. Various applications like [data.census.gov](http://data.census.gov) take advantage of the various public APIs to show up to date information and allow for analysis without having to download the data, and read it into a different software.
 
 (insert a population counter for each state)
 
 ### Census APIs
 
-The Census Bureau provides three main APIs, that are related to each other. 
+The Census Bureau provides three main APIs, that are related to each other.
 
 1. [Census Data API](https://www.census.gov/content/dam/Census/data/developers/api-user-guide/api-guide.pdf) - provides access to the raw statistical data from all the various programs
 2. TigerWeb - serves census area boundaries/shapes that the statistical data will "map" onto
-3. Geocoder - translates an address and other locations formats into lat/lng and unique geographic identifier(s) 
+3. Geocoder - translates an address and other locations formats into lat/lng and unique geographic identifier(s)
 
-Note, not all the APIs have to be used, as information can substituted, or various libraries/tools can be used to abstract the use of the APIs. For example CitySDK, the library this guide will be using combines all three queries to one by 
+Note, not all the APIs have to be used, as information can substituted, or various libraries/tools can be used to abstract the use of the APIs. For example CitySDK, the library this guide will be using combines all three queries to one by
 
 1. Getting the unique identifier of an area (the state where that coordinate point is in)
 2. Pulling the specific columns from a product (ACS 2015 Medium Household income)
-3. Getting the geography/shape of the state, joining the column to it 
+3. Getting the geography/shape of the state, joining the column to it
 
 (add chart here with an example of how the APIs connect)

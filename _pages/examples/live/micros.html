@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="../../../assets/citysdk.js"></script>
+    <style>
+      #map {
+        height: 600px;
+        width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="info"></div>
+    <script>
+      //promise
+      function censusPromise(args) {
+        return new Promise(function(resolve, reject) {
+          census(args, function(err, json) {
+            if (!err) {
+              resolve(json);
+            } else {
+              reject(err);
+            }
+          });
+        });
+      }
+
+      const QUERIES = [
+        {
+          query: {
+            vintage: "2017",
+            geoHierarchy: {
+              "metropolitan statistical area/micropolitan statistical area": "*"
+            },
+            sourcePath: ["acs", "acs5"],
+            values: ["NAME", "B00001_001E"],
+            geoResolution: "20m"
+          }
+        }
+      ];
+
+      const map = L.map("map").setView([38.8895, -98.4283], 4);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      censusPromise(QUERIES[0].query).then(function(response) {
+        //filter for only micro
+        const featureCollection = {
+          type: "FeatureCollection",
+          features: response.features.filter(function(feature) {
+            return feature.properties.NAME.includes("Micro Area");
+          })
+        };
+
+        const layer = L.geoJson(featureCollection, {
+          onEachFeature: function(feature, layer) {
+            layer.on("click", function(e) {
+              console.log(e, feature);
+            });
+          }
+        }).addTo(map);
+
+        const group = new L.featureGroup([layer]);
+        map.fitBounds(group.getBounds());
+      });
+    </script>
+  </body>
+</html>

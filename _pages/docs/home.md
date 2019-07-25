@@ -28,7 +28,7 @@ subnav:
 
 CitySDK streamlines the development of applications that use the Census Bureau Data. It combines the Census Data API with TIGER to provide GeoJSON (geographic shapes), and geocoder to provide translations from latitude/longitude to the required geography study area. This abstracts the multiple APIs into one query allowing for developers, data scientisit, and civic innovators to drastically reduce the time to explore data, get insight and develop applications.
 
-[link to github](https://uscensusbureau.github.io/citysdk/) is currently maintained by Logan Powell.
+[CitySDK](https://uscensusbureau.github.io/citysdk/) is maintained by Logan Powell.
 
 ## Installation
 ```
