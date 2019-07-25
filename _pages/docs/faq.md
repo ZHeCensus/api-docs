@@ -13,7 +13,7 @@ The Census Bureau's suverys provide a wide range of information on the populatio
 
 The data is available to the publicly via [Data.census.gov](https://data.census.gov/cedsci/), and for developers via an [API](https://www.census.gov/data/developers/about.html).
 
-## Why is some data not available at at smaller geographic levels?
+## Why is some data not available at smaller geographic levels or for certain groups of populations or industries?
 
 When numbers or specific populations are reponse are low for an area, statistical summaries are not released ...
 E.g. ACS 1 year has data down to the block group (check) for current areas. While decennial census has census tract level.
@@ -23,10 +23,10 @@ It is an important process done to protect the privacy of individual respondents
 Read more about it here:
 [ACS Data Suppression](https://www.census.gov/programs-surveys/acs/technical-documentation/data-suppression.html)
 
-### Why are some
-
-Similary for economical data, ... NACIS
-
 ## Why is CitySDK slow?
 
-If CitySDK GeoJSON takes a while to load, or crashes the browser ...
+If you are using CitySDK on the client and GeoJSON takes a while to load or crashes the browser, prefetch your data and service it statically to your client instead. Follow the example on[saving the file locally in Node.js using fs]({{ '/examples/#example-saving-the-file-locally-in-nodejs-using-fs' | relative_url }}).
+
+If you are suing CitySDK on the server (Node.js) and GeoJSON include the flag max-old-space-size `node --max-old-space-size=4096`.
+
+Using current predicates or large geographic queries may also slow down queries.

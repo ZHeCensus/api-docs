@@ -38,14 +38,31 @@ npm install citysdk
 ## The `citysdk` Function
 
 CitySDK v2.0 exports a single function, which takes two arguments:
-- The first is an options object with a set of key/value pair parameters (See ["Parameters"] below)
+- The first is an options object with a set of key/value pair parameters (See "Parameters" below)
 - The second is a conventional (error, response) node-style callback, which will be called upon completion of the `census` function and applied to the response
 
-["Parameters"]: #parameters
+```javascript
+census({key: value}, function(error,response){
+  //callback
+})
+```
+
+Alternatively you can create a CitySDK promise by doing the follwoing
+```javascript
+function censusPromise(args){
+  return new Promise(function(resolve, reject) {
+    census(args, function(err, json) {
+      if (!err) {
+        resolve(json);
+      } else {
+        reject(err);
+      }
+    });
+  });
+};
+```
 
 ## Parameters
-
-Brief overview of each argument parameter that can be passed into CitySDK v2.0
 
 | Parameter       | Type        | Description   | [Geocodes] | [Stats] | [GeoJSON] | [GeoJSON with Stats] 
 | ---             | ---         | ---                                                                | :---:    | :---: | :---:    | :---:           
@@ -57,18 +74,18 @@ Brief overview of each argument parameter that can be passed into CitySDK v2.0
 | `predicates`    | `object`    | Used as a filter available on some `values`                        |          | ✔`*`  |          | ✔`*`           
 | `statsKey`      | `str`       | You may request a key for Census' statistics API [here]            |          | ✔`**` |          | ✔`**`          
 
-[Geocodes]: #census-geocoding
-[Stats]: #getting-statistics
+[Geocodes]: #geocoding-latitudelongitude---fips-code
+[Stats]: #statistics
 [GeoJSON]: #cartographic-geojson
-[GeoJSON with Stats]: #geojson-with-stats
+[GeoJSON with Stats]: #geojson-merged-with-statistics
 [Census product]: https://www.census.gov/data/developers/data-sets.html
 [here]: https://api.census.gov/data/key_signup.html
-[Resolution]: #cartographic-geojson 
+[Resolution]: #cartographic-geojson
 
 `*`  : optional 
 `**` : optional for < 500 requests daily
 
-# Geocoding (latitude/longitude -> FIPS code)
+## Geocoding (latitude/longitude -> FIPS code)
 
 With the exception of "microdata" statistics (not yet available via Census' API), all Census data is aggregated to geographic areas of different sizes. As such, all of Census' API's require a set of/unique geographic identifier(s) to return any data (AKA: [FIPS] [GEOIDs]). Given that these identifiers are not common knowledge, the CitySDK provides a way for the user to identify their geographic scope of interest using a geographic coordinate (`lat` + `lng`).
 
@@ -85,13 +102,10 @@ There are two ways to scope your geography using this functionality:
 [GEOIDs]: https://www.census.gov/geo/reference/geoidentifiers.html
 
 #### Example: Request a single geographic area by coordinate
- RETURN TYPE: `JSON`
 
 You may pass a `{"lat" : <float>, "lng" : <float>}` object as the first and _only_ value for the `geoHierarchy` key:
 
 ```js
-import census from 'citysdk'
-
 census({
     "vintage" : 2015,    // required
     "geoHierarchy" : {   // required
@@ -110,11 +124,8 @@ census({
 Notice how the function prepends an additional geographic component (`"state" : "12"`) to the options object. In order to fully qualify the geographic area (GEOID) associated with the county, the state is needed. In this example the fully qualified GEOID would be `12009` with the first two digits (`12`) qualifying the state and `009` qualifying the county within that state. This appropriate geographic hierarchy creation is handled by the function for you.
 
 #### Example: Request all of a descendant geography-type within a coordinate-specified geographic area
-RETURN TYPE: `JSON`
 
 ```js
-import census from 'citysdk'
-
 census({
     "vintage" : "2015",   // required
     "geoHierarchy" : {    // required
@@ -140,7 +151,7 @@ All Census-defined geographic areas are composed of Census "Blocks". Some of the
 [descendants]: https://www2.census.gov/geo/pdfs/reference/geodiagram.pdf
 
 
-# Statistics
+## Statistics
 
 This parameter set will call the Census Statistics API and reformat the results with a couple highly requested features:
 - Census statistics are returned as a standard JSON object rather than the csv-like format of the "raw" API
@@ -166,10 +177,8 @@ The corresponding `sourcePath` for this endpoint is `["acs", "acs1"]`
 
 
 #### Example: get `"values"` by ID:
-RETURN TYPE: `JSON`
 
 ```js
-import census from 'citysdk'
 
 census({
     "vintage" : 2015,        // required
@@ -193,7 +202,6 @@ Here, we added the parameters for `sourcePath` (the path to the survey and/or so
 ---
 
 #### Example: get `"values"` by ID (with key):
-RETURN TYPE: `JSON`
 
 ```js
 census({
@@ -215,11 +223,8 @@ census({
 ```
 
 #### Example: Filter results by `predicates`:
-RETURN TYPE: `JSON`
 
-##### `predicates`
-
-Predicates are used to create a sub-selection of statistical values based on a given range or categorical qualifyer.
+Predicates are used to create a sub-selection of statistical values based on a given range or categorical qualifyer. Example below shows getting the range of Virginia counties that have a population between 0 and 100,000.
 
 ```js
 census({
@@ -231,7 +236,7 @@ census({
     "sourcePath" : ["acs", "acs1"],  
     "values" : ["NAME"],            
     "predicates" : {                
-        "B01001_001E" : "0:100000"  // number range separated by `:`
+        "B01001_001E" : "0:100000"  // number range separated by `:` 
     },
     "statsKey" : "<your key here>"
   }, 
@@ -262,7 +267,6 @@ census({
 If you'd like to use "timeseries" data, you may do so for statistics only. Mapping timeseries data is currently unsupported. Note that many timeseries products rely heavily on the `"predicates"` option:
 
 #### Example: get `'timeseries"` data:
-RETURN TYPE: `JSON`
 
 ```js
 census({
@@ -290,7 +294,7 @@ census({
 For some sources (e.g., the American Community Survey), most of the `values` can also be used as `predicates`, but are optional. In others, (e.g., International Trade), `predicates` are a key part of the statistical query. In either case, at least one value within `values` must be supplied.
 
 
-# Cartographic GeoJSON
+## Cartographic GeoJSON
 
 You can also use the CitySDK to retrieve Cartographic Boundary files, which have been translated into GeoJSON. The only additional parameter you'll need to know is a simple declaration of `geoResolution` of which there are three options:
 
@@ -311,31 +315,7 @@ See the full available Cartographic GeoJSON in the [Geographies Available by Vin
 
 [Geographies Available by Vintage]: #geographies-available-by-vintage
 
-#### Example: Saving the file locally in Node.js using [`fs`]
-RETURN TYPE: `JSON STRING`
-
-```js
-var fs = require("fs")
-
-census({
-    "vintage" : 2017,
-    "geoHierarchy" : {
-      "metropolitan statistical area/micropolitan statistical area": "*"
-    },
-    "geoResolution" : "500k" // required
-  }, 
-  (err, res) => {
-    fs.writeFile("./directory/filename.json", 
-      JSON.stringify(res), 
-      () => console.log("done")
-  )}
-)
-```
-[`fs`]: https://nodejs.org/api/fs.html
-
-This would convert the returned geojson to a string, which allows it to be saved via Node.js' fileSystem API.
-
-### Notable Example:
+#### Notable Example:
 
 ```js
 census({
@@ -354,55 +334,17 @@ It's important to note that - when querying for these GeoJSON files - you may re
 
 If you wish to get back _only_ those geographies you specify, you may do so by using the last and perhaps most useful feature included in the v2.0 release: Getting GeoJSON with statistics _included_ within the `"FeatureCollection"` `properties` object!
 
-# GeoJSON *Merged with* Statistics
-RETURN TYPE: `JSON`
+## GeoJSON *Merged with* Statistics
 
 There are a number of reasons you might want to merge your statistics into their GeoJSON/geographic boundaries, all of which are relevant when seeking to map Census data:
 
 1) Creating [choropleth] maps of statistics (e.g., using `values`)
+
 2) Mapping only those geographies that meet a certain set of criteria
+
 3) Showing a user their current Census geographic context (i.e., leveraging the Geocoding capabilities of CitySDK)
 
 [choropleth]: https://en.wikipedia.org/wiki/Choropleth_map
-
-### Dynamic Use Example
-
-A more dynamic example of using stats merged with GeoJSON on the fly with `citysdk` can be found here:
-
-[![mapbox-geocoding](https://raw.githubusercontent.com/uscensusbureau/citysdk/gh-pages/examples/assets/images/mapbox-geocoding.png)](https://uscensusbureau.github.io/citysdk/examples/mapbox/with-mapbox-gl_geocoding_hover/index.html)
-
-Type in a county name and see the unweighted sample count of the population (ACS) for all the Block Groups within that County.
-
-Use Chrome for best results (mapbox-gl geocoder caveat)
-
-[source code](https://github.com/uscensusbureau/citysdk/tree/gh-pages/examples/mapbox/with-mapbox-gl_geocoding)
-
-
-## All Counties
-
-```js
-census({
-    "vintage" : "2017",
-    "geoHierarchy" : {
-      "county": "*"
-    },
-    "sourcePath" : ["acs", "acs5"],  
-    "values" : ["B19083_001E"],    // GINI index             
-    "statsKey" : "<your key here>",
-    "geoResolution" : "500k"
-  },
-)
-```
-
-In this example, we use `citysdk` to create the payload and then save it via Nodes [`fs.writeFileSync`] and then serve it via a [Mapbox-GL] map.
-
-[`fs.writeFileSync`]: https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options
-[Mapbox-GL]: https://www.mapbox.com/mapbox-gl-js/api/
-
-
-[![counties](https://raw.githubusercontent.com/uscensusbureau/citysdk/gh-pages/examples/assets/images/counties.PNG)](https://uscensusbureau.github.io/citysdk/examples/mapbox/counties_static/index.html)
-
-[source code](https://github.com/uscensusbureau/citysdk/tree/gh-pages/examples/mapbox/counties_static)
 
 ### Notable Example:
 
@@ -473,7 +415,7 @@ This is a very large request, in fact, one of the largest you could possibly mak
 }
 ```
 
-# Census Cartography Files in GeoJSON Format
+## Census Cartography Files in GeoJSON Format
 
 The Census Bureau publishes both high and low accuracy geographic area files to accommodate the widest possible variety of user needs (within feasibility). Cartography Files are simplified representations of selected geographic areas from the Census Bureau’s Master Address File/Topologically Integrated Geographic Encoding and Referencing (MAF/TIGER) system. _These boundary files are specifically designed for small scale thematic mapping (i.e., for visualizations)_.
 
@@ -520,7 +462,7 @@ Geographic Area Type                                          | 1990  | 2000  | 
 `"zip code tabulation area"`                                    |       | ✔     |     |        |  ✔          | ✔         
 
 
-## More Information about Cartography Files
+### More Information about Cartography Files
 - For more information about the files translated herein please visit the Census Bureau's [Cartographic Boundary File Description
  Page](https://www.census.gov/geo/maps-data/data/cbf/cbf_description.html)
 - For a comparison of the available formats of geographic area files, please visit the Census Bureau's [TIGER Products page
