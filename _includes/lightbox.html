@@ -36,7 +36,7 @@
     color: rgb(255, 255, 255);
     padding: 10px 0;
     height: 150px;
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   #lightbox-close {
@@ -65,24 +65,24 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const mainContent = document.querySelector('.usa-layout-docs-main_content');
+  document.addEventListener("DOMContentLoaded", function() {
+    const mainContent = document.querySelector(".usa-layout-docs-main_content");
     if (mainContent) {
-      const lightbox = document.querySelector('#lightbox');
-      const lightboxImage = document.querySelector('#lightbox-image');
-      const lightboxCaption = document.querySelector('#lightbox-caption');
+      const lightbox = document.querySelector("#lightbox");
+      const lightboxImage = document.querySelector("#lightbox-image");
+      const lightboxCaption = document.querySelector("#lightbox-caption");
 
-      mainContent.querySelectorAll('img').forEach(image => {
+      mainContent.querySelectorAll("img").forEach(image => {
         image.onclick = function() {
-          lightbox.style.display = 'block';
+          lightbox.style.display = "block";
           lightboxImage.src = image.src;
           lightboxCaption.innerHTML = image.alt;
         };
       });
 
-      const lightboxClose = document.querySelector('#lightbox-close');
+      const lightboxClose = document.querySelector("#lightbox-close");
       lightboxClose.onclick = function() {
-        lightbox.style.display = 'none';
+        lightbox.style.display = "none";
       };
     }
   });
@@ -90,13 +90,13 @@
   document.onkeydown = function(evt) {
     evt = evt || window.event;
     var isEscape = false;
-    if ('key' in evt) {
-      isEscape = evt.key === 'Escape' || evt.key === 'Esc';
+    if ("key" in evt) {
+      isEscape = evt.key === "Escape" || evt.key === "Esc";
     } else {
       isEscape = evt.keyCode === 27;
     }
-    if (isEscape && lightbox.style.display === 'block') {
-      lightbox.style.display = 'none';
+    if (isEscape && lightbox.style.display === "block") {
+      lightbox.style.display = "none";
     }
   };
 </script>

@@ -5,7 +5,7 @@ permalink: /
 layout: home
 ---
 
-Statistics produced by the Census Bureau are comprehensive measures of various topics of the people and economy of the United States. CitySDK streamlines, enchances the usability and access to Census data in the development of applications. This site provides documentation, examples, and guides focused on using the Census Data API in frontend and backend Javascript applications by unitizing CitySDK.
+CitySDK streamlines, and enchances the usability and access to Census data. This site provides documentation, examples, and guides focused on using the Census Data API in frontend and backend Javascript applications by unitizing CitySDK.
 
 ## Sections
 
@@ -26,7 +26,6 @@ The examples section contains examples built with CitySDK and various other java
 Few examples:
 
 - Choropleth map using leaflet
-- Using predicates
 
 ### [Community]({{ '/community/' | relative_url }})
 

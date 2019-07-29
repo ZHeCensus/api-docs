@@ -16,6 +16,6 @@ sidenav: guides
 
 A quick introduction in the background of the Census Bureau and its data, and using the various datasets using CitySDK.
 
-### Understanding NACIS data
+### Searching for Census Variables of Interest
 
-### Geographies
+https://github.com/uscensusbureau/Census_Academy/blob/master/Courses/01_API_Introduction/02_Searching_for_Variables_of_Interest.md (needs to be updated for data.census.gov)

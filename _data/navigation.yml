@@ -60,8 +60,6 @@ examples:
     href: /examples/
   - text: Choropleth map using leaflet
     href: /examples/leaflet-choropleth
-  - text: Using predicates
-    href: /examples/predicates
 
 community:
   - text: Overview

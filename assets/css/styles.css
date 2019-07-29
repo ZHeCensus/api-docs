@@ -10,3 +10,11 @@ iframe {
   resize: both;
   overflow: auto;
 }
+
+.usa-nav{
+  z-index: 1;
+}
+
+#lightbox{
+  z-index: 2;
+}
