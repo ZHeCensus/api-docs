@@ -19,7 +19,7 @@ lightbox: true
 
 ## Querying with Geography
 
-The last dimension is the geographic entity. You may of noticed the `"geoHierarchy": {states: "*"}` object used in the previous section to get data for all the states. Census data is provided in many other familiar aggregated geographies like county, ZIP codes, school and congressional districts. But it is also provided in census specific geographies like tracts, block groups, blocks, metropolitan and tribal areas. These can provide a much finer detail and specific geography but only available in certain data products or regions.
+The last dimension is the geographic entity. You may of noticed the `"geoHierarchy": {states: "*"}` object used in the previous section to get data for all the states. Census data is provided in many other familiar aggregated geographies such as county, ZIP codes, school and congressional districts. Additionally it is also provided in census specific geographies such as tracts, block groups, blocks, metropolitan and tribal areas. These can provide a much finer scales but only available in certain data products or regions.
 
 ![]({{ '/assets/images/block.jpg' | relative_url }})
 [View all the various Census Geographies using TIGERweb](https://tigerweb.geo.census.gov/tigerweb/)
@@ -98,22 +98,22 @@ For example, if you want to get all the census tracts in Denver County you can u
         "sourcePath" : ["acs","acs5"]
     }
 
-    //result
-    [
-      {
-        "B00001_001E": 437,
-        "state": "08",
-        "county": "031",
-        "tract": "000903"
-      },
-      {
-        "B00001_001E": 290,
-        "state": "08",
-        "county": "031",
-        "tract": "001302"
-      },
-    ...
-    ]
+//result
+[
+  {
+    "B00001_001E": 437,
+    "state": "08",
+    "county": "031",
+    "tract": "000903"
+  },
+  {
+    "B00001_001E": 290,
+    "state": "08",
+    "county": "031",
+    "tract": "001302"
+  },
+...
+]
 ```
 
 You can also just get only the id for specific tract by including only vintage and hierarchy.
