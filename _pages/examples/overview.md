@@ -6,23 +6,33 @@ permalink: /examples/
 layout: post
 sidenav: examples
 subnav:
+  - text: Leaflet Examples
+    href: "#leaflet"
+  - text: Mapbox Examples
+    href: "#mapbox"
   - text: Quick Reference Examples
     href: "#quick-reference-examples"
   - text: Saving the file locally
     href: "#saving-the-file-locally-in-nodejs-using-fs"
   - text: Getting all counties
     href: "#getting-all-counties"
+lightbox: true
 ---
 
 ### Leaflet
 
-- Simple leaflet
-- Leaflet choropleth map
+- [Leaflet with popup]({{ '/examples/leaflet/' | relative_url }})
+  ![Example of a map using leaflet with a popup]({{ '/assets/images/examples/example-leaflet.png' | relative_url }})
+
+- [Leaflet choropleth map]({{ '/examples/leaflet-choropleth/' | relative_url }})
+  ![Example of a choropleth map using leaflet]({{ '/assets/images/examples/example-leaflet-choropleth.png' | relative_url }})
 
 ### Mapbox
 
-- Mapbox choropleth map
-- Mapbox dymanic loading
+- [Mapbox choropleth map]({{ '/examples/mapbox-choropleth/' | relative_url }})
+  ![Example of a choropleth map using mapbox]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
+- [Mapbox dynamic loading]({{ '/examples/mapbox-dynamic/' | relative_url }})
+  ![Example of citysdk being used dynamically in mapbox]({{ '/assets/images/examples/example-mapbox-dyamnic-loading.png' | relative_url }})
 
 ## Quick Reference Examples
 

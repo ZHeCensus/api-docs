@@ -8,7 +8,7 @@ sidenav: guides-intro
 lightbox: true
 ---
 
-To use CitySDK include the script in your page's head. Download citysdk.js [here]({{ '/assets/citysdk.js' | relative_url }}) (temp).
+To use CitySDK include the script in your page's head. Download citysdk.js [here]({{ '/assets/citysdk.js' | relative_url }}){:download="citysdk.js"}.
 
 ```html
 <script src="./citysdk.js"></script>

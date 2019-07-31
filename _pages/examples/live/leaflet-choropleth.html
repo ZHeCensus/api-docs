@@ -67,7 +67,8 @@ permalink: /examples/live/leaflet-choropleth/
         sourcePath: ["acs", "acs5", "subject"],
         // Total!!Estimate!!Total population : S0102_C01_001E
         // 60 years and over!!Estimate!!Total population : S0102_C02_001E
-        values: ["S0102_C01_001E", "S0102_C02_001E"]
+        values: ["S0102_C01_001E", "S0102_C02_001E"],
+        statsKey: "3c04140849164b373c8b1da7d7cc8123ef71b7ab"
       },
       function(error, response) {
         //setup styles
@@ -90,7 +91,7 @@ permalink: /examples/live/leaflet-choropleth/
         function style(feature) {
           var total_pop = feature.properties.S0102_C01_001E;
           var total_pop_over60 = feature.properties.S0102_C02_001E;
-          //calcuate percent
+          //calculate percent
           if (total_pop && total_pop_over60) {
             // check if valid (no 0s or undefined)
             var percent = (total_pop_over60 / total_pop) * 100;

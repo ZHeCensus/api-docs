@@ -7,6 +7,8 @@ layout: guide
 sidenav: guides-intro
 lightbox: true
 subnav:
+  - text: Example
+    href: "#example"
   - text: Final Result
     href: "#final-result"
   - text: GeoJSON
@@ -14,6 +16,8 @@ subnav:
   - text: Getting Help
     href: "#getting-help"
 ---
+
+### Example
 
 Now that we have all the dimensions we can construct a call using CitySDK. Let's find the percentage of households in all New York counties that own one or more vehicles.
 

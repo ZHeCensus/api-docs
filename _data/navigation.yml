@@ -23,7 +23,7 @@ primary:
 
 secondary:
   - text: View on Github
-    href: https://github.com/
+    href: https://github.com/ZHeCensus/api-docs
     external: true
 
 docs:
@@ -58,8 +58,6 @@ guides-intro:
 examples:
   - text: Overview
     href: /examples/
-  - text: Choropleth map using leaflet
-    href: /examples/leaflet-choropleth
 
 community:
   - text: Overview

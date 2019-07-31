@@ -25,16 +25,12 @@ The examples section contains examples built with CitySDK and various other java
 
 Few examples:
 
-- Choropleth map using leaflet
+- [Leaflet choropleth map]({{ '/examples/leaflet-choropleth/' | relative_url }})
+  ![Example of a choropleth map using leaflet]({{ '/assets/images/examples/example-leaflet-choropleth.png' | relative_url }})
+
+- [Mapbox dynamic loading]({{ '/examples/mapbox-dynamic/' | relative_url }})
+  ![Example of citysdk being used dynamically in mapbox]({{ '/assets/images/examples/example-mapbox-dyamnic-loading.png' | relative_url }})
 
 ### [Community]({{ '/community/' | relative_url }})
 
 The community section contains links to community resources such as contacts and help channels, other community libraries, and showcases to applications and tools built with the Census Data API.
-
----
-
-### How to contribute
-
-If you would like to add features and content, report an issue, or suggest changes submit a pull request on [Github](https://github.com).
-
-This website was built using U.S. Web Design System's Jekyll theme. [(uswds-jekyll)](https://github.com/18F/uswds-jekyll)

@@ -23,3 +23,9 @@ You're probably thinking: "How am I supposed to know what codes to use inside th
 - Ryan Dolan: ryan.s.dolan@census.gov
 - Gerson Vasquez: gerson.d.vasquez@census.gov
 - Alexandra Barker: alexandra.s.barker@census.gov
+
+### How to contribute to this website
+
+If you would like to add features and content, report an issue, or suggest changes submit a pull request on [Github](https://github.com/ZHeCensus/api-docs/issues).
+
+This website was built using U.S. Web Design System's Jekyll theme. [(uswds-jekyll)](https://github.com/18F/uswds-jekyll)
