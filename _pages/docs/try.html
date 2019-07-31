@@ -42,7 +42,7 @@ leaflet: true
   </ul>
   <h4>Note</h4>
   <p>
-    Running a large query, especially at a lower resolution might crash the
+    Running a large query, especially at a lower map scale might crash the
     page. If this happens either reduce the resolution or select a smaller study
     area. For larger queries we recommend using Node with
     `--max-old-space-size=4096` flag. Also refer to our <a href={{
@@ -159,143 +159,156 @@ leaflet: true
 <script src="{{ '/assets/data/try_examples.js' | relative_url }}"></script>
 
 <script>
-  var initInput = {
-    vintage: "2017",
-    geoHierarchy: {
-      state: {
-        lat: 38.8482,
-        lng: -76.9312
-      },
-      county: "*"
-    },
-    sourcePath: ["acs", "acs5"],
-    values: ["B00001_001E"],
-    geoResolution: "20m"
-  };
+"use strict";
 
-  var app = new Vue({
-    delimiters: ["${", "}"],
-    el: "#app",
-    data: {
-      input: JSON.stringify(initInput, null, 2),
-      loading: false,
-      error: "",
-      result: {},
-      status: "",
-      layer: null,
-      map: null,
-      showMap: true,
-      examples: examples
+var initInput = {
+  vintage: "2017",
+  geoHierarchy: {
+    state: {
+      lat: 38.8482,
+      lng: -76.9312
     },
-    computed: {
-      output: function() {
-        return JSON.stringify(this.result, null, 2);
-      },
-      features: function() {
-        if (this.result && this.result.features) {
-          return this.result;
-        }
-        return {
-          type: "FeatureCollection",
-          features: []
-        };
+    county: "*"
+  },
+  sourcePath: ["acs", "acs5"],
+  values: ["B00001_001E"],
+  geoResolution: "20m"
+};
+var app = new Vue({
+  delimiters: ["${", "}"],
+  el: "#app",
+  data: {
+    input: JSON.stringify(initInput, null, 2),
+    loading: false,
+    error: "",
+    result: {},
+    status: "",
+    layer: null,
+    map: null,
+    showMap: true,
+    examples: examples
+  },
+  computed: {
+    output: function output() {
+      return JSON.stringify(this.result, null, 2);
+    },
+    features: function features() {
+      if (this.result && this.result.features) {
+        return this.result;
       }
-    },
-    mounted() {
-      this.intiMap();
-    },
-    watch: {
-      features: function(val) {
-        if (val.features && val.features.length) {
-          this.showMap = true;
 
-          if (this.layer) {
-            this.map.removeLayer(this.layer);
+      return {
+        type: "FeatureCollection",
+        features: []
+      };
+    }
+  },
+  mounted: function mounted() {
+    this.intiMap();
+  },
+  watch: {
+    features: function features(val) {
+      var _this = this;
+
+      if (val.features && val.features.length) {
+        this.showMap = true;
+
+        if (this.layer) {
+          this.map.removeLayer(this.layer);
+        }
+
+        this.layer = L.geoJSON(val, {
+          onEachFeature: function onEachFeature(feature, layer) {
+            var table = Object.keys(feature.properties).map(function (key) {
+              return "<p><b>" + key + "</b>: " + feature.properties[key] + "</p>";
+            }).join("");
+            layer.bindPopup(table);
           }
-          this.layer = L.geoJSON(val, {
-            onEachFeature: function(feature, layer) {
-              var table = Object.keys(feature.properties)
-                .map(function(key) {
-                  return (
-                    "<p><b>" + key + "</b>: " + feature.properties[key] + "</p>"
-                  );
-                })
-                .join("");
-              layer.bindPopup(table);
-            }
-          }).addTo(this.map);
-
-          setTimeout(() => {
-            this.map.invalidateSize();
-            var group = new L.featureGroup([this.layer]);
-            this.map.fitBounds(group.getBounds());
-          }, 100);
-        } else {
-          this.showMap = false;
-        }
-      }
-    },
-    methods: {
-      updateExample(example) {
-        this.input = JSON.stringify(example.input, null, 2);
-        this.result = example.result;
-      },
-      intiMap() {
-        //init map
-        this.map = L.map("map").setView([38.8482, -76.9312], 10);
-
-        L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-          attribution:
-            '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.map);
+        setTimeout(function () {
+          _this.map.invalidateSize();
 
+          var group = new L.featureGroup([_this.layer]);
+
+          _this.map.fitBounds(group.getBounds());
+        }, 100);
+      } else {
         this.showMap = false;
-      },
-      updateInput(event) {
-        var target = event.target;
-        var value = target.value;
-        this.error = "";
-        //todo: stop cursor from jumping to the end when value changes
-        //todo: use hljs.highlightBlock
-        try {
-          const formatted = JSON.stringify(JSON.parse(value), null, 4);
-        } catch (error) {
-          this.error = error.message;
-        }
-        this.input = value;
-      },
-      runQuery() {
-        this.loading = true;
-        this.status = "loading";
-        census(JSON.parse(this.input), (error, result) => {
-          if (error) {
-            this.result = {};
-            this.error = error;
-          } else {
-            this.result = result;
-          }
-          this.loading = false;
-          this.status = null;
-        });
-      },
-      copyResult() {
-        //https://stackoverflow.com/questions/36639681/how-to-copy-text-from-a-div-to-clipboard
-        var range = document.createRange();
-        var element = document.getElementById("results");
-        var setback = false;
-        if (element.style.display === "none") {
-          var setback = true;
-          element.style.display = "block";
-        }
-        range.selectNode(element);
-        window.getSelection().removeAllRanges(); // clear current selection
-        window.getSelection().addRange(range); // to select text
-        document.execCommand("copy");
-        window.getSelection().removeAllRanges(); // to deselect
-        if (setback === true) {
-          element.style.display = "none";
-        }
       }
     }
-  });
+  },
+  methods: {
+    updateExample: function updateExample(example) {
+      this.input = JSON.stringify(example.input, null, 2);
+      this.result = example.result;
+      this.loading = false;
+      this.error = "";
+    },
+    intiMap: function intiMap() {
+      //init map
+      this.map = L.map("map").setView([38.8482, -76.9312], 10);
+      L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+      this.showMap = false;
+    },
+    updateInput: function updateInput(event) {
+      var target = event.target;
+      var value = target.value;
+      this.error = ""; //todo: stop cursor from jumping to the end when value changes
+      //todo: use hljs.highlightBlock
+
+      try {
+        var formatted = JSON.stringify(JSON.parse(value), null, 4);
+      } catch (error) {
+        this.error = error.message;
+      }
+
+      this.input = value;
+    },
+    runQuery: function runQuery() {
+      var _this2 = this;
+      console.log("running query")
+
+      this.loading = true;
+      this.status = "loading";
+      census(JSON.parse(this.input), function (error, result) {
+        if (error) {
+          _this2.result = {};
+          _this2.error = error;
+        } else {
+
+          console.log(result)
+          _this2.result = result;
+        }
+
+        _this2.loading = false;
+        _this2.status = null;
+      });
+    },
+    copyResult: function copyResult() {
+      //https://stackoverflow.com/questions/36639681/how-to-copy-text-from-a-div-to-clipboard
+      var range = document.createRange();
+      var element = document.getElementById("results");
+      var setback = false;
+
+      if (element.style.display === "none") {
+        var setback = true;
+        element.style.display = "block";
+      }
+
+      range.selectNode(element);
+      window.getSelection().removeAllRanges(); // clear current selection
+
+      window.getSelection().addRange(range); // to select text
+
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges(); // to deselect
+
+      if (setback === true) {
+        element.style.display = "none";
+      }
+    }
+  }
+});
 </script>

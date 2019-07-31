@@ -222,7 +222,7 @@ Lastly CitySDK also offers geojson return if you would like to map your data. By
 }
 ```
 
-See the examples section to find out how to map using GeoJSON, or examples other visualizations.
+See the [examples section]({{ '/community/' | relative_url }}) to find out how to display the data on a map using GeoJSON, or examples other visualizations.
 
 ### Getting Help
 

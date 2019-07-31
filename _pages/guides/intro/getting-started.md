@@ -24,7 +24,7 @@ npm install citysdk
 const census = require("citysdk");
 ```
 
-If you would like to just try out small queries use the [try section]({{ '/docs/try/' | relative_url }})
+If you would like to just run small queries, you can use the [try it out app]({{ '/docs/try/' | relative_url }})
 
 ---
 
