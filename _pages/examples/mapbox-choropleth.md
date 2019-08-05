@@ -81,7 +81,7 @@ The layer is [Hosted/VT_2017_050_00_PY_D1](https://gis-server.data.census.gov/ar
 
 !["source-layer" : "County"]({{ '/assets/images/examples/example-choropleth-mapbox3.png' | relative_url }})
 
-Now lets load the vector layer.
+Now lets load the vector tiles layer.
 
 ```js
 map.on("load", function() {
@@ -101,4 +101,96 @@ map.on("load", function() {
     }
   });
 });
+```
+
+![vector tiles layer rendered]({{ '/assets/images/examples/example-choropleth-mapbox4.png' | relative_url }})
+
+## Query data
+
+We use CitySDK to query for the GINI Index from the ACS 5-year. 
+
+```js
+census(
+  {
+    vintage: 2017,
+    geoHierarchy: {
+      county: "*"
+    },
+    sourcePath: ["acs", "acs5"],
+    values: ["B19083_001E"]
+  },
+  function(error, response) {
+    console.log(response)
+  }
+);
+```
+
+## Merging data with vector tiles
+
+Vector tiles do not originally contain data we have to "merge" the CitySDK data to the tiles. But the since the vector tiles and CitySDK data are from two different sources and types, the method used appends the CitySDK data with the fill color value to a mapbox style expression.
+
+First create a function to generate the colors using Chroma.js. Add the script tag in the head, then create the function that will 
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js"></script>
+```
+
+```js
+var values = response.map(function(county){
+  return county.B19083_001E;
+}) //get all the GINI Index values , B19083_001E
+var colorScale = chroma.scale(['white', 'black']).domain(values, 'q', 5) // 5 quantiles 
+
+function getColor(value){
+  return colorScale(val).hex();
+}
+
+```
+
+Then refactor the map.on function to first load the CitySDK data, generate the color expression, lastly load the vector tiles layer.
+
+```js
+map.on("load", function() {
+
+  census(
+  {
+    vintage: 2017,
+    geoHierarchy: {
+      county: "*"
+    },
+    sourcePath: ["acs", "acs5"],
+    values: ["B19083_001E"]
+  },
+  function(error, response) {
+
+
+    //style expression
+    var colorExpression = ['match', ['get', 'GEOID']]; 
+    values.forEach(function(value){
+      colorExpression.push(value, getColor(value));
+    });
+
+    //add else case for style expression
+    colorExpression.push('rgba(0,0,0,0)');
+
+
+     map.addLayer({
+    id: "counties",
+    type: "fill",
+    source: {
+      type: "vector",
+      tiles: [
+        "https://gis-server.data.census.gov/arcgis/rest/services/Hosted/VT_2017_050_00_PY_D1/VectorTileServer/tile/{z}/{y}/{x}.pbf"
+      ]
+    },
+    "source-layer": "County",
+    paint: {
+      "fill-opacity": 0.6,
+      "fill-color": colorExpression
+    }
+  });
+});
+  }
+);
+
 ```
