@@ -1,6 +1,6 @@
 ---
 title: Objectives and Details
-description: This is a guides page.
+description: Introduction - Objectives and Details
 permalink: /guides/intro/
 
 layout: guide

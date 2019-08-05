@@ -1,6 +1,6 @@
 ---
 title: Source and metrics
-description: This is a guides page.
+description: Introduction - Source and metrics
 permalink: /guides/intro/2/
 
 layout: guide

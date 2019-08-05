@@ -1,6 +1,6 @@
 ---
 title: Implementations
-description: This is a implementations page.
+description: List of implementations of the Census Data API in other  programing languages.
 permalink: /community/implementations/
 
 layout: post

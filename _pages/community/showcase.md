@@ -1,6 +1,6 @@
 ---
 title: Showcase
-description: This is a showcase page.
+description: Showcased projects that use the Census Data API.
 permalink: /community/showcase/
 
 layout: post

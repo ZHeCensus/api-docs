@@ -1,6 +1,6 @@
 ---
 title: Displaying the data
-description: This is a guides page.
+description: Introduction - Displaying the data
 permalink: /guides/intro/4/
 
 layout: guide

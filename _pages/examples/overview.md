@@ -1,6 +1,6 @@
 ---
 title: Examples
-description: This is a examples page.
+description: Examples on using CitySDK and Census Data with various libraries such as leaflet and mapbox.
 permalink: /examples/
 
 layout: post

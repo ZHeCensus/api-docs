@@ -4,6 +4,7 @@ description: Example on using citysdk to create a simple leaflet map with popup
 permalink: /examples/leaflet/
 
 layout: post
+lightbox: true
 ---
 
 This example shows how to setup a leaflet map with popup on features when clicked. See completed example [here]({{ '/examples/live/leaflet-choropleth/' | relative_url }}){:target="\_blank"}.

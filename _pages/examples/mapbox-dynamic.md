@@ -1,6 +1,6 @@
 ---
 title: Mapbox dynamic loading
-description: This is a examples page.
+description: Mapbox dynamic loading example using CitySDK
 permalink: /examples/mapbox-dynamic/
 
 layout: post

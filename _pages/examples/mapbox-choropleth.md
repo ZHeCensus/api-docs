@@ -1,6 +1,6 @@
 ---
 title: Mapbox choropleth map
-description: This is a examples page.
+description: Mapbox choropleth map example using CitySDK and Vector Tiles
 permalink: /examples/mapbox-choropleth/
 
 layout: post

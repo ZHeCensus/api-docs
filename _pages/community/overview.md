@@ -1,6 +1,6 @@
 ---
 title: Community
-description: This is a community page.
+description: Community resources for CitySDK and Census Data.
 permalink: /community/
 
 layout: post

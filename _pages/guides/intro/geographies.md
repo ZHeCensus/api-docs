@@ -1,6 +1,6 @@
 ---
 title: Geographies
-description: This is a guides page.
+description: Introduction - Geographies
 permalink: /guides/intro/3/
 
 layout: guide

@@ -1,6 +1,6 @@
 ---
 title: Choropleth map using leaflet
-description: Example on setting up a choropleth map using leaflet to display a percentage and citysdk to get census data.
+description: Example on setting up a choropleth map using leaflet to display a percentage and CitySDK to get census data.
 permalink: /examples/leaflet-choropleth/
 
 layout: post

@@ -1,6 +1,6 @@
 ---
 title: Frequently asked questions
-description: This is a faq page.
+description: Frequently asked questions on CitySDK and Census Data.
 permalink: /docs/faq/
 
 layout: post

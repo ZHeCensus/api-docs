@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: This is a guides page.
+description: Introduction - Getting Started
 permalink: /guides/intro/1/
 
 layout: guide

@@ -1,6 +1,6 @@
 ---
 title: Guides
-description: This is a guides page.
+description: Guides on using CitySDK and Census Data API
 permalink: /guides/
 
 layout: post
@@ -15,7 +15,3 @@ sidenav: guides
 ### [Introduction]({{ '/guides/intro/' | relative_url }})
 
 A quick introduction in the background of the Census Bureau and its data, and using the various datasets using CitySDK.
-
-### Searching for Census Variables of Interest
-
-https://github.com/uscensusbureau/Census_Academy/blob/master/Courses/01_API_Introduction/02_Searching_for_Variables_of_Interest.md (needs to be updated for data.census.gov)

@@ -1,6 +1,6 @@
 ---
 title: Documentation
-description: This is a documentation page.
+description: Documentation overview of CitySDK.
 permalink: /docs/
 
 layout: post
