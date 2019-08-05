@@ -109,7 +109,7 @@ map.on("load", function() {
 
 ## Query data
 
-We use CitySDK to query for the GINI Index from the ACS 5-year. 
+We use CitySDK to query for the GINI Index from the ACS 5-year.
 
 ```js
 census(
@@ -122,7 +122,7 @@ census(
     values: ["B19083_001E"]
   },
   function(error, response) {
-    console.log(response)
+    console.log(response);
   }
 );
 ```
@@ -144,19 +144,21 @@ To generate a color expression, we first create a function to generate the color
 Now we can create a function that will take in any value and return a hex color code.
 
 ```js
- var values = response.map(function (county) {
+var values = response.map(function(county) {
   return county.B19083_001E;
-}) //get all the GINI Index values , B19083_001E
+}); //get all the GINI Index values , B19083_001E
 
-var colorScale = chroma.scale('OrRd').padding(.15).domain(values, 'q', 5) 
+var colorScale = chroma
+  .scale("OrRd")
+  .padding(0.15)
+  .domain(values, "q", 5);
 
 function getColor(val) {
   return colorScale(val).hex();
 }
-
 ```
 
-To generate the color expression for mapbox styling, we have to group the GEOIds that fall into the same quantiles groups. So we first loop though each to create an object with color groups as keys and array of GEOIDs as values. 
+To generate the color expression for mapbox styling, we have to group the GEOIds that fall into the same quantiles groups. So we first loop though each to create an object with color groups as keys and array of GEOIDs as values.
 
 e.g. {"#FFF" : ["04343", "04343"]}
 
@@ -167,45 +169,44 @@ e.g. ['match', ['get', 'GEOID'], ["04343", "04343"], "#FFF"]
 Lastly we append 'rgba(0,0,0,0)' for any GEOIDs that is not included in the reponse query.
 
 ```js
-var colors = {}
+var colors = {};
 
-response.forEach(function (county) {
+response.forEach(function(county) {
   var GEOID = county.state + county.county;
-  var value = county.B19083_001E
+  var value = county.B19083_001E;
   var color = getColor(value);
   if (!colors[color]) {
-    colors[color] = []
+    colors[color] = [];
   }
   colors[color].push(GEOID);
 });
 
-var colorExpression = ['match', ['get', 'GEOID']];
-var colorQuantiles = Object.entries(colors).forEach(function ([color, GEOIDs]) {
-  colorExpression.push(GEOIDs, color)
-}, )
+var colorExpression = ["match", ["get", "GEOID"]];
+var colorQuantiles = Object.entries(colors).forEach(function([color, GEOIDs]) {
+  colorExpression.push(GEOIDs, color);
+});
 
-colorExpression.push('rgba(0,0,0,0)');
+colorExpression.push("rgba(0,0,0,0)");
 ```
 
 From that we can add they layer the same way but instead of a static fill-color we can put our color expression.
 
 ```js
-
 map.addLayer({
-            id: "counties",
-            type: "fill",
-            source: {
-              type: "vector",
-              tiles: [
-                "https://gis-server.data.census.gov/arcgis/rest/services/Hosted/VT_2017_050_00_PY_D1/VectorTileServer/tile/{z}/{y}/{x}.pbf"
-              ]
-            },
-            "source-layer": "County",
-            paint: {
-              "fill-opacity": 0.8,
-              "fill-color": colorExpression
-            }
- });
+  id: "counties",
+  type: "fill",
+  source: {
+    type: "vector",
+    tiles: [
+      "https://gis-server.data.census.gov/arcgis/rest/services/Hosted/VT_2017_050_00_PY_D1/VectorTileServer/tile/{z}/{y}/{x}.pbf"
+    ]
+  },
+  "source-layer": "County",
+  paint: {
+    "fill-opacity": 0.8,
+    "fill-color": colorExpression
+  }
+});
 ```
 
 Completed map and code should look like this.
@@ -213,78 +214,83 @@ Completed map and code should look like this.
 ![Completed choropleth]({{ '/assets/images/examples/example-mapbox-choropleth5.png' | relative_url }})
 
 ```js
-map.on("load", function () {
+map.on("load", function() {
+  census(
+    {
+      vintage: 2017,
+      geoHierarchy: {
+        county: "*"
+      },
+      sourcePath: ["acs", "acs5"],
+      values: ["NAME", "B19083_001E"]
+    },
+    function(error, response) {
+      var values = response.map(function(county) {
+        return county.B19083_001E;
+      }); //get all the GINI Index values , B19083_001E
+      var colorScale = chroma
+        .scale("OrRd")
+        .padding(0.15)
+        .domain(values, "q", 5); // 5 quantiles
 
-      census({
-          vintage: 2017,
-          geoHierarchy: {
-            county: "*"
-          },
-          sourcePath: ["acs", "acs5"],
-          values: ["NAME", "B19083_001E"]
+      function getColor(val) {
+        return colorScale(val).hex();
+      }
+
+      //generate style expression
+      var colors = {};
+
+      response.forEach(function(county) {
+        var GEOID = county.state + county.county;
+        var value = county.B19083_001E;
+        var color = getColor(value);
+        if (!colors[color]) {
+          colors[color] = [];
+        }
+        colors[color].push(GEOID);
+      });
+
+      var colorExpression = ["match", ["get", "GEOID"]];
+      var colorQuantiles = Object.entries(colors).forEach(function([
+        color,
+        GEOIDs
+      ]) {
+        colorExpression.push(GEOIDs, color);
+      });
+
+      colorExpression.push("rgba(0,0,0,0)");
+
+      map.addLayer({
+        id: "counties",
+        type: "fill",
+        source: {
+          type: "vector",
+          tiles: [
+            "https://gis-server.data.census.gov/arcgis/rest/services/Hosted/VT_2017_050_00_PY_D1/VectorTileServer/tile/{z}/{y}/{x}.pbf"
+          ]
         },
-        function (error, response) {
-
-          var values = response.map(function (county) {
-            return county.B19083_001E;
-          }) //get all the GINI Index values , B19083_001E
-          var colorScale = chroma.scale('OrRd').padding(.15).domain(values, 'q', 5) // 5 quantiles 
-
-          function getColor(val) {
-            return colorScale(val).hex();
-          }
-
-          //generate style expression
-          var colors = {}
-
-          response.forEach(function (county) {
-            var GEOID = county.state + county.county;
-            var value = county.B19083_001E
-            var color = getColor(value);
-            if (!colors[color]) {
-              colors[color] = []
-            }
-            colors[color].push(GEOID);
-          });
-
-          var colorExpression = ['match', ['get', 'GEOID']];
-          var colorQuantiles = Object.entries(colors).forEach(function ([color, GEOIDs]) {
-            colorExpression.push(GEOIDs, color)
-          }, )
-
-          colorExpression.push('rgba(0,0,0,0)');
-
-          map.addLayer({
-            id: "counties",
-            type: "fill",
-            source: {
-              type: "vector",
-              tiles: [
-                "https://gis-server.data.census.gov/arcgis/rest/services/Hosted/VT_2017_050_00_PY_D1/VectorTileServer/tile/{z}/{y}/{x}.pbf"
-              ]
-            },
-            "source-layer": "County",
-            paint: {
-              "fill-opacity": 0.8,
-              "fill-color": colorExpression
-            }
-          });
-
-                  });
-    });
-
+        "source-layer": "County",
+        paint: {
+          "fill-opacity": 0.8,
+          "fill-color": colorExpression
+        }
+      });
+    }
+  );
+});
 ```
 
 ## Adding a popup
 
-Add an click listener to the counties layer, in the callback search up the GEOID of the county of the feature that was clicked and setHTML to the response values. 
+Add an click listener to the counties layer, in the callback search up the GEOID of the county of the feature that was clicked and setHTML to the response values.
+
 ```js
-map.on('click', 'counties', function (e) {
-  console.log(e)
-  var coordinates = e.lngLat
+map.on("click", "counties", function(e) {
+  console.log(e);
+  var coordinates = e.lngLat;
   //look up GINI value
   var GEOID = e.features[0].properties.GEOID;
-  var details = response.find(function (county) {
+  var details = response.find(function(county) {
     var response_GEOID = county.state + county.county;
     return GEOID === response_GEOID;
   });
@@ -294,7 +300,6 @@ map.on('click', 'counties', function (e) {
     .setHTML("GINI value for" + details.NAME + ":" + details.B19083_001E)
     .addTo(map);
 });
-
 ```
 
 ## Additional Notes
