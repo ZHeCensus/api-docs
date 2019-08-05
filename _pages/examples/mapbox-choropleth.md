@@ -8,7 +8,7 @@ layout: post
 
 This example shows how to setup a choropleth map using mapbox, to show the [GINI Index of all US Counties](https://www.census.gov/topics/income-poverty/income-inequality/about/metrics/gini-index.html){:target="\_blank"} from ACS 5-year (2017). Mapbox vector titles are used as it provides better performance then leaflet when rendering large amount of data. If you would like to use GeoJSON check out the Additional Notes below, but it is discouraged to load all counties via GeoJSON due to the large size. This code is adpated from [mapbox's example on Join local JSON data with vector tile geometries](https://docs.mapbox.com/mapbox-gl-js/example/data-join/){:target="\_blank"}.
 
-![Completed choropleth]({{ '/assets/images/examples/example-choropleth-mapbox.png' | relative_url }})
+![Completed choropleth]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
 
 See completed example [here]({{ '/examples/live/mapbox-choropleth/' | relative_url }}){:target="\_blank"}
 
@@ -75,13 +75,13 @@ Find more [here](https://factfinder.census.gov/service/GeographyIds.html){:targe
 So for 2017 and county level we can look for
 `2017` and `050` using find.
 
-![Vector tile for 2017 counties (050)]({{ '/assets/images/examples/example-choropleth-mapbox1.png' | relative_url }})
+![Vector tile for 2017 counties (050)]({{ '/assets/images/examples/example-mapbox-choropleth1.png' | relative_url }})
 
 The layer is [Hosted/VT_2017_050_00_PY_D1](https://gis-server.data.census.gov/arcgis/rest/services/Hosted/VT_2017_050_00_PY_D1/VectorTileServer). Lastly we have to get the source-layer name. Click into the Styles and find the source-layer.
 
-![Vector tile's page, with style link underlined]({{ '/assets/images/examples/example-choropleth-mapbox2.png' | relative_url }})
+![Vector tile's page, with style link underlined]({{ '/assets/images/examples/example-mapbox-choropleth2.png' | relative_url }})
 
-!["source-layer" : "County"]({{ '/assets/images/examples/example-choropleth-mapbox3.png' | relative_url }})
+!["source-layer" : "County"]({{ '/assets/images/examples/example-mapbox-choropleth3.png' | relative_url }})
 
 Now lets load the vector tiles layer.
 
@@ -105,7 +105,7 @@ map.on("load", function() {
 });
 ```
 
-![vector tiles layer rendered]({{ '/assets/images/examples/example-choropleth-mapbox4.png' | relative_url }})
+![vector tiles layer rendered]({{ '/assets/images/examples/example-mapbox-choropleth4.png' | relative_url }})
 
 ## Query data
 
@@ -210,7 +210,7 @@ map.addLayer({
 
 Completed map and code should look like this.
 
-![Completed choropleth]({{ '/assets/images/examples/example-choropleth-mapbox5.png' | relative_url }})
+![Completed choropleth]({{ '/assets/images/examples/example-mapbox-choropleth5.png' | relative_url }})
 
 ```js
 map.on("load", function () {
