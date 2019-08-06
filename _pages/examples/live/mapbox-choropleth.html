@@ -108,7 +108,6 @@ permalink: /examples/live/mapbox-choropleth/
 
             //get value of click
             map.on("click", "counties", function(e) {
-              console.log(e);
               var coordinates = e.lngLat;
               //look up GINI value
               var GEOID = e.features[0].properties.GEOID;

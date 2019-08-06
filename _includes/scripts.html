@@ -36,3 +36,20 @@ _script %}
   //]]>
 </script>
 {% endif %} {% if page.lightbox %} {% include lightbox.html %} {% endif %}
+
+<script>
+  //fixes nav for mobile not closing
+  "use strict";
+
+  document
+    .querySelector(".usa-nav-close")
+    .addEventListener("click", function() {
+      if (
+        Array.from(document.querySelector(".usa-nav").classList).includes(
+          "is-visible"
+        )
+      ) {
+        document.querySelector(".usa-nav").classList.remove("is-visible");
+      }
+    });
+</script>
