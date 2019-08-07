@@ -34,11 +34,17 @@ leaflet: true
     </div>
     <span title="Copy" class="copy" v-on:click="copyResult">📋</span>
   </div>
-  <h3>Some Examples</h3>
+  <h3>Query Examples</h3>
   <ul>
     <li v-for="example in examples" v-on:click="updateExample(example)">
       <a>${ example.description }</a>
     </li>
+  </ul>
+  <h3>Learn more</h3>
+  <ul>
+      <li><a href="{{ '/docs/' | relative_url }}">Overview documentation</a></li>
+    <li><a href="{{ '/examples/' | relative_url }}">Example visualizations</a></li>
+    <li><a href="{{ '/guides/intro/' | relative_url }}">Quick start guide</a></li>
   </ul>
   <h4>Note</h4>
   <p>
