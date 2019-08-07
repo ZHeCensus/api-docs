@@ -10,6 +10,8 @@ subnav:
     href: "#leaflet"
   - text: Mapbox Examples
     href: "#mapbox"
+  - text: D3js Examples
+    href: "#D3js"
   - text: Quick Reference Examples
     href: "#quick-reference-examples"
   - text: Saving the file locally
@@ -33,6 +35,10 @@ lightbox: true
   ![Example of a choropleth map using mapbox]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
 - [Mapbox dynamic loading]({{ '/examples/mapbox-dynamic/' | relative_url }})
   ![Example of citysdk being used dynamically in mapbox]({{ '/assets/images/examples/example-mapbox-dyamnic-loading.png' | relative_url }})
+
+### D3js
+
+- [D3.js Line Chart]({{ '/examples/d3-line-chart/' | relative_url }})
 
 ## Quick Reference Examples
 

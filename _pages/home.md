@@ -5,7 +5,11 @@ permalink: /
 layout: home
 ---
 
-CitySDK streamlines, and enchances the usability and access to Census data. This site provides documentation, examples, and guides focused on using the Census Data API in frontend and backend Javascript applications by unitizing CitySDK.
+This site provides documentation, examples, and guides focused on using the Census Data API in frontend and backend Javascript applications by unitizing CitySDK, which streamlines, and enhances the usability and access to the data.
+
+Try out CitySDK in your browser [here]({{ '/docs/try/' | relative_url }}).
+
+![Try it section]({{ '/assets/images/tryit.png' | relative_url }})
 
 ## Sections
 
@@ -25,11 +29,11 @@ The examples section contains examples built with CitySDK and various other java
 
 Few examples:
 
-- [Leaflet choropleth map]({{ '/examples/leaflet-choropleth/' | relative_url }})
-  ![Example of a choropleth map using leaflet]({{ '/assets/images/examples/example-leaflet-choropleth.png' | relative_url }})
+- [Leaflet]({{ '/examples/leaflet/' | relative_url }})
+  ![Example of a map using leaflet with a popup]({{ '/assets/images/examples/example-leaflet.png' | relative_url }})
 
-- [Mapbox dynamic loading]({{ '/examples/mapbox-dynamic/' | relative_url }})
-  ![Example of citysdk being used dynamically in mapbox]({{ '/assets/images/examples/example-mapbox-dyamnic-loading.png' | relative_url }})
+- [Mapbox choropleth map]({{ '/examples/mapbox-choropleth/' | relative_url }})
+  ![Example of a choropleth map using mapbox]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
 
 ### [Community]({{ '/community/' | relative_url }})
 

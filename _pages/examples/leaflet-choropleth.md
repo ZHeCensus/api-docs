@@ -7,7 +7,7 @@ layout: post
 lightbox: true
 ---
 
-This example shows how to setup a choropleth map using leaflet to display a percentage. See completed example [here]({{ '/examples/live/leaflet-choropleth/' | relative_url }}){:target="\_blank"}. Adapted from [leaflet's example](https://leafletjs.com/examples/choropleth/){:target="\_blank"}
+This example shows how to setup a choropleth map using leaflet to display a percentage. See the completed example [here]({{ '/examples/live/leaflet-choropleth/' | relative_url }}){:target="\_blank"}. Adapted from [leaflet's example](https://leafletjs.com/examples/choropleth/){:target="\_blank"}
 
 ![Completed choropleth map]({{ '/assets/images/examples/example-leaflet-choropleth.png' | relative_url }})
 

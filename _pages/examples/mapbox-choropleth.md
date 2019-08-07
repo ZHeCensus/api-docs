@@ -10,7 +10,7 @@ This example shows how to setup a choropleth map using mapbo. The data used is t
 
 ![Completed choropleth]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
 
-See completed example [here]({{ '/examples/live/mapbox-choropleth/' | relative_url }}){:target="\_blank"}.
+See the completed example [here]({{ '/examples/live/mapbox-choropleth/' | relative_url }}){:target="\_blank"}.
 
 ## Setting up
 

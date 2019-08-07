@@ -1,13 +1,13 @@
 ---
 title: Basic Leaflet
-description: Example on using citysdk to create a simple leaflet map with popup
+description: Example on using CitySDK to create a simple leaflet map with popup
 permalink: /examples/leaflet/
 
 layout: post
 lightbox: true
 ---
 
-This example shows how to setup a leaflet map with popup on features when clicked. See completed example [here]({{ '/examples/live/leaflet-choropleth/' | relative_url }}){:target="\_blank"}.
+This example shows how to setup a leaflet map with popup on features when clicked. See the completed example [here]({{ '/examples/live/leaflet-choropleth/' | relative_url }}){:target="\_blank"}.
 
 The data used is the number of Oil and Gas Extraction businesses for counties in Texas, via the (County Business Patterns (CBP) API)['https://www.census.gov/data/developers/data-sets/cbp-nonemp-zbp/cbp-api.html]. The api uses North American Industry Classification System (NAICS), for Oil and Gas Extraction the NAICS is 211.
 
