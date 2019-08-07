@@ -35,6 +35,9 @@ Few examples:
 - [Mapbox choropleth map]({{ '/examples/mapbox-choropleth/' | relative_url }})
   ![Example of a choropleth map using mapbox]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
 
+- [D3.js Line Chart]({{ '/examples/d3-line-chart/' | relative_url }})
+  ![Example of a line chart using D3.js]({{ '/assets/images/examples/example-d3-line-chart.png' | relative_url }})
+
 ### [Community]({{ '/community/' | relative_url }})
 
 The community section contains links to community resources such as contacts and help channels, other community libraries, and showcases to applications and tools built with the Census Data API.

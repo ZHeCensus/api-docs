@@ -10,8 +10,8 @@ subnav:
     href: "#leaflet"
   - text: Mapbox Examples
     href: "#mapbox"
-  - text: D3js Examples
-    href: "#D3js"
+  - text: D3.js Examples
+    href: "#d3js"
   - text: Quick Reference Examples
     href: "#quick-reference-examples"
   - text: Saving the file locally
@@ -36,9 +36,10 @@ lightbox: true
 - [Mapbox dynamic loading]({{ '/examples/mapbox-dynamic/' | relative_url }})
   ![Example of citysdk being used dynamically in mapbox]({{ '/assets/images/examples/example-mapbox-dyamnic-loading.png' | relative_url }})
 
-### D3js
+### D3.js
 
 - [D3.js Line Chart]({{ '/examples/d3-line-chart/' | relative_url }})
+  ![Example of a line chart using D3.js]({{ '/assets/images/examples/example-d3-line-chart.png' | relative_url }})
 
 ## Quick Reference Examples
 
