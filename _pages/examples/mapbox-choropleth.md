@@ -6,7 +6,9 @@ permalink: /examples/mapbox-choropleth/
 layout: post
 ---
 
-This example shows how to setup a choropleth map using mapbo. The data used is the [GINI Index of all US Counties](https://www.census.gov/topics/income-poverty/income-inequality/about/metrics/gini-index.html){:target="\_blank"} from ACS 5-year (2017). Mapbox vector tiles are used as it provides better performance than rendering large amount of GeoJSON polygons. If you would like to use GeoJSON with mapbox check out the [Additional Notes below](#using-geojson), but it is discouraged to load all counties via GeoJSON due to the large size. This code is adapted from [Mapbox's example on Join local JSON data with vector tile geometries](https://docs.mapbox.com/mapbox-gl-js/example/data-join/){:target="\_blank"}.
+This example shows how to setup a choropleth map using mapbo. The data used is the [GINI Index of all US Counties](https://www.census.gov/topics/income-poverty/income-inequality/about/metrics/gini-index.html){:target="\_blank"} from ACS 5-year (2017). Mapbox vector tiles are used as it provides better performance than rendering large amount of GeoJSON polygons. This code is adapted from [Mapbox's example on Join local JSON data with vector tile geometries](https://docs.mapbox.com/mapbox-gl-js/example/data-join/){:target="\_blank"}.
+
+If you would like to use GeoJSON with mapbox check out the [Additional Notes below](#using-geojson). It is much simpler than using vector tiles but it is discouraged to load all counties via GeoJSON due to the large size.
 
 ![Completed choropleth]({{ '/assets/images/examples/example-mapbox-choropleth.png' | relative_url }})
 
@@ -43,7 +45,7 @@ In the body setup a container with an id of map and add styles.
 <div id="map"></div>
 ```
 
-In a script tag after the map div, we initialize the map.
+In a script tag after the map div, we initialize the map with mapbox accessToken you can get from [here](https://docs.mapbox.com/api/accounts/#tokens){:target="\_blank"}
 
 ```js
 mapboxgl.accessToken = "<your access token here>";
